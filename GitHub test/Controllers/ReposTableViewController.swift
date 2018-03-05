@@ -35,6 +35,7 @@ class ReposTableViewController: UITableViewController {
         changeNumberOfRepos()
     }
     
+    //MARK: -Change datas in header
     func changeUserImage() {
         self.userImage.layer.masksToBounds = true
         self.userImage.layer.cornerRadius = self.userImage.frame.width / 2
@@ -54,7 +55,17 @@ class ReposTableViewController: UITableViewController {
     func changeNumberOfRepos() {
         self.numberOfRepos.text = "Repositories: \(UserDefaults.standard.value(forKey: "numberOfRepos")!)"
     }
-     
+    
+    @objc
+    func imageTapped(gesture: UILongPressGestureRecognizer) {
+        if gesture.state == .began {
+            self.numberOfRepos.text = UserDefaults.standard.value(forKey: "userName") as? String
+        } else if gesture.state == .ended {
+            changeNumberOfRepos()
+        }
+    }
+    
+    //MARK: -Get and save repositories and issues data
     func getData(url: URL) {
         URLSession.shared.dataTask(with: url) { (data, response, err) in
             guard let data = data else { return }
@@ -68,15 +79,6 @@ class ReposTableViewController: UITableViewController {
                 print("error")
             }
         }.resume()
-    }
-    
-    @objc
-    func imageTapped(gesture: UILongPressGestureRecognizer) {
-        if gesture.state == .began {
-            self.numberOfRepos.text = UserDefaults.standard.value(forKey: "userName") as? String
-        } else if gesture.state == .ended {
-            changeNumberOfRepos()
-        }
     }
     
     func saveRepositories(repos: [ReposData]) {
@@ -120,7 +122,7 @@ class ReposTableViewController: UITableViewController {
         }
     }
     
-    
+    //MARK: -Reload button
     @IBAction func reloadButtonPressed(_ sender: Any) {
         guard clearRepositories() else { return }
         guard clearIssues() else { return }
