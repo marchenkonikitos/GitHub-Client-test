@@ -79,7 +79,7 @@
 				1A56EC2B2049782700421B9B /* GitHub test.entitlements */,
 				1A2BFD6D204890D400B19177 /* Delegate */,
 				1A2BFD6E204890E500B19177 /* View */,
-				1A2BFD702048910200B19177 /* Model */,
+				1A2BFD702048910200B19177 /* Controllers */,
 				1A2BFD6F204890F300B19177 /* Data */,
 				1A2BFD5C2048151500B19177 /* Info.plist */,
 			);
@@ -117,13 +117,13 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		1A2BFD702048910200B19177 /* Model */ = {
+		1A2BFD702048910200B19177 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				1A2BFD6220482D2700B19177 /* LogInController.swift */,
 				1A2BFD64204875ED00B19177 /* ReposTableViewController.swift */,
 			);
-			path = Model;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		B5885D7099188EEF52B4C1D6 /* Pods */ = {
