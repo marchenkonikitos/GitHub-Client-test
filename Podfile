@@ -4,5 +4,6 @@ target 'GitHub test' do
   use_frameworks!
 
   pod 'Alamofire'
+  pod 'Locksmith'
 
 end
