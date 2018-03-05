@@ -68,7 +68,6 @@ class LogInController: UIViewController {
                         self.saveData(userData: userData)
                         self.loginComplete()
                     } catch {
-                            print("shtoto ne tak")
                     }
                 } else {
                     self.shakeButton()

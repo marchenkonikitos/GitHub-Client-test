@@ -97,10 +97,8 @@ class ReposTableViewController: UITableViewController {
                 URLSession.shared.dataTask(with: jsonURL) { (data, response, err) in
                     guard let data = data else { return }
                     guard err == nil else { return }
-                    print("ya tut")
                     do {
                         let issuesData = try JSONDecoder().decode([IssueData].self, from: data)
-                        print("ya tut")
                         self.saveIssues(issues: issuesData, repository: repos)
                     } catch {
                         print("error")
@@ -111,7 +109,6 @@ class ReposTableViewController: UITableViewController {
     }
     
     func saveIssues(issues: [IssueData], repository: Repository) {
-        print("hi")
         for issue in issues {
             let comments_url = issue.comments_url
             let title = issue.title
@@ -136,8 +133,9 @@ class ReposTableViewController: UITableViewController {
         
         tableView.reloadData()
     }
+    
+    
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
