@@ -15,7 +15,6 @@ class ReposTableViewController: UITableViewController {
     @IBOutlet var numberOfRepos: UILabel!
     
     var repositoriesArray = loadRepositories()
-    var issuesArray = loadIssues()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +30,9 @@ class ReposTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        self.navigationController?.isNavigationBarHidden = true
+        
         changeUserImage()
         changeNumberOfRepos()
     }
@@ -74,7 +76,6 @@ class ReposTableViewController: UITableViewController {
             do {
                 let reposData = try JSONDecoder().decode([ReposData].self, from: data)
                 self.saveRepositories(repos: reposData)
-                self.tableView.reloadData()
             } catch {
                 print("error")
             }
@@ -132,6 +133,7 @@ class ReposTableViewController: UITableViewController {
             return
         }
         getData(url: jsonURL)
+        print(loadRepositories())
         
         tableView.reloadData()
     }
@@ -160,11 +162,21 @@ class ReposTableViewController: UITableViewController {
         return cell
     }
     
-    var selectRepository: Repository?
+    var selectedRepository: Repository?
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        selectRepository = repositoriesArray?[indexPath.row]
+        selectedRepository = repositoriesArray?[indexPath.row]
+        
+        performSegue(withIdentifier: "goToIssues", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        
+        if segue.identifier == "goToIssues" {
+            (segue.destination as! IssueTableViewController).repository = selectedRepository
+        }
     }
 
     /*

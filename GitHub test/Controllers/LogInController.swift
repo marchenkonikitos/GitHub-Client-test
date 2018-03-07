@@ -27,7 +27,7 @@ class LogInController: UIViewController {
             loginTextField.text = username
             passwordTextField.text = password
             
-            doLogin(usr: username, psw: password)
+            doLogin(usr: username, psw: password, isEdit: false)
         }
     }
 
@@ -40,16 +40,12 @@ class LogInController: UIViewController {
             shakeButton()
             return
         }
-        do {
-            try Locksmith.saveData(data: ["username" : username, "password" : password], forUserAccount: "Account")
-        } catch {
-            print("Unable to save data")
-        }
-        doLogin(usr: username!, psw: password!)
+        
+        doLogin(usr: username!, psw: password!, isEdit: true)
         
     }
     
-    func doLogin(usr: String, psw: String) {
+    func doLogin(usr: String, psw: String, isEdit: Bool) {
         signButton.isEnabled = false
         
         let url = URL(string: "https://api.github.com/user")
@@ -66,8 +62,11 @@ class LogInController: UIViewController {
                     do {
                         let userData = try JSONDecoder().decode(UserData.self, from: data!)
                         self.saveData(userData: userData)
-                        self.loginComplete()
+                        self.loginComplete(username: usr, password: psw, isEdit: isEdit)
+                        
                     } catch {
+                        self.shakeButton()
+                        self.wrongData()
                     }
                 } else {
                     self.shakeButton()
@@ -106,7 +105,20 @@ class LogInController: UIViewController {
         }
     }
     
-    func loginComplete() {
+    func loginComplete(username: String, password: String, isEdit: Bool) {
+        
+        if isEdit {
+            do {
+                try Locksmith.saveData(data: ["username" : username, "password" : password], forUserAccount: "Account")
+            } catch {
+                do {
+                    try Locksmith.updateData(data: ["username" : username, "password" : password], forUserAccount: "Account")
+                } catch {
+                    print("Unable to save data")
+                }
+            }
+        }
+        
         UIView.animate(withDuration: 0.3, animations: {
             self.signButton.backgroundColor = .green
             self.signButton.setTitle("Confirmed", for: .normal)
