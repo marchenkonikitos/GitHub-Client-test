@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //-----Delete repositories and issues data
         //clearRepositories()
         //clearIssues()
+        //clearComments()
         return true
     }
 

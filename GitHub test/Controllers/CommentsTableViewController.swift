@@ -19,8 +19,6 @@ class CommentsTableViewController: UITableViewController {
         let title = issue.title
         self.title = title
         
-        commentsArray = loadComments()
-        
         loadCommentsArray()
     }
     
@@ -29,6 +27,8 @@ class CommentsTableViewController: UITableViewController {
         let jsonURL = URL(string: jsonURLString)
         
         getData(url: jsonURL!)
+        
+        commentsArray = loadComments()
     }
     
     func getData(url: URL) {
@@ -46,12 +46,16 @@ class CommentsTableViewController: UITableViewController {
     }
     
     func saveComments(comments: [CommentData]) {
+        clearComments()
+        
         for comment in comments {
             let body = comment.body
             let html_url = comment.html_url
             
             guard saveComment(body: body, html_url: html_url, issue: issue) else { return }
         }
+        
+        commentsFilter()
     }
     
     func commentsFilter() {
@@ -81,8 +85,6 @@ class CommentsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentsTableViewCell
-
-        commentsArray = loadComments()
         
         if (commentsArray.count > 0) && (commentsArray.count > indexPath.row) {
             let commentForCell = commentsArray[indexPath.row]
