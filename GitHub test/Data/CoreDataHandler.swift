@@ -73,6 +73,7 @@ func saveIssue(comments_url: String, title: String, comments: Int32, state: Stri
     issue.comments = comments
     issue.state = state
     issue.repository = repository
+    issue.url = url
     
     do {
         try context.save()

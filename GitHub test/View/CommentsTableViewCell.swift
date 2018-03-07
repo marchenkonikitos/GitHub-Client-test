@@ -10,5 +10,9 @@ import UIKit
 
 class CommentsTableViewCell: UITableViewCell {
     
-
+    @IBOutlet var commentName: UILabel!
+    
+    func initCell(comment: Comments) {
+        commentName.text = comment.body
+    }
 }

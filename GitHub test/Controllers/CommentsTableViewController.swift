@@ -21,14 +21,49 @@ class CommentsTableViewController: UITableViewController {
         
         commentsArray = loadComments()
         
-        if commentsArray.count == 0 {
-            
-        }
+        loadCommentsArray()
     }
     
     func loadCommentsArray() {
         let jsonURLString = (issue.url)! + "/comments"
         let jsonURL = URL(string: jsonURLString)
+        
+        getData(url: jsonURL!)
+    }
+    
+    func getData(url: URL) {
+        URLSession.shared.dataTask(with: url) { (data, response, err) in
+            guard let data = data else { return }
+            guard err == nil else { return }
+            
+            do {
+                let commentsData = try JSONDecoder().decode([CommentData].self, from: data)
+                self.saveComments(comments: commentsData)
+            } catch {
+                print("error")
+            }
+        }.resume()
+    }
+    
+    func saveComments(comments: [CommentData]) {
+        for comment in comments {
+            let body = comment.body
+            let html_url = comment.html_url
+            
+            guard saveComment(body: body, html_url: html_url, issue: issue) else { return }
+        }
+    }
+    
+    func commentsFilter() {
+        commentsArray = loadComments()
+        
+        for count in 0..<(commentsArray.count - 1) {
+            if commentsArray[count] != issue {
+                commentsArray.remove(at: count)
+            }
+        }
+        
+        print(commentsArray.count)
     }
 
     // MARK: - Table view data source
@@ -40,15 +75,25 @@ class CommentsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        let count = issue.comments
+        return Int(count)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentsTableViewCell
 
-        // Configure the cell...
+        commentsArray = loadComments()
+        
+        if (commentsArray.count > 0) && (commentsArray.count > indexPath.row) {
+            let commentForCell = commentsArray[indexPath.row]
+            cell.initCell(comment: commentForCell)
+        }
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     /*

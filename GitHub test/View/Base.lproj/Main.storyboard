@@ -267,7 +267,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="y9o-Jw-qni" customClass="CommentsTableViewCell" customModule="GitHub_test" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentCell" id="y9o-Jw-qni" customClass="CommentsTableViewCell" customModule="GitHub_test" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y9o-Jw-qni" id="Ejs-Vm-mk3">
@@ -297,6 +297,9 @@
                                         <constraint firstItem="3eP-CI-K1c" firstAttribute="centerY" secondItem="Ejs-Vm-mk3" secondAttribute="centerY" id="oB1-sT-kV1"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="commentName" destination="ZgA-f7-DOw" id="ieB-yx-euI"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

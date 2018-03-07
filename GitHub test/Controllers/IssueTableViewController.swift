@@ -19,11 +19,7 @@ class IssueTableViewController: UITableViewController {
         let title = repository.name
         self.title = title
         
-        issuesArray = loadIssues()
-        
-        if issuesArray.count == 0 {
-            loadIssueArray()
-        }
+        loadIssueArray()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +37,8 @@ class IssueTableViewController: UITableViewController {
         let jsonURL = URL(string: jsonURLString)
         
         getData(url: jsonURL!)
+        
+        issuesArray = loadIssues()
     }
     
     func getData(url: URL) {
@@ -58,6 +56,7 @@ class IssueTableViewController: UITableViewController {
     }
     
     func saveIssues(issues: [IssueData]) {
+        clearIssues()
         
         for issue in issues {
             let title = issue.title
@@ -67,6 +66,18 @@ class IssueTableViewController: UITableViewController {
             let url = issue.url
             
             guard saveIssue(comments_url: comments_url, title: title, comments: comments, state: state, url: url, repository: repository) else { return }
+        }
+        
+        issuesFilter()
+    }
+    
+    func issuesFilter() {
+        issuesArray = loadIssues()
+        
+        for count in 0..<(issuesArray.count - 1) {
+            if issuesArray[count] != repository {
+                issuesArray.remove(at: count)
+            }
         }
     }
     
@@ -91,7 +102,6 @@ class IssueTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "issueCell", for: indexPath) as! IssueTableViewCell
         
-        issuesArray = loadIssues()
         if (issuesArray.count > 0) && (issuesArray.count > indexPath.row) {
             let issueForCell = issuesArray[indexPath.row]
             cell.initCell(issue: issueForCell)
@@ -104,10 +114,15 @@ class IssueTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        issuesArray = loadIssues()
         selectedIssue = issuesArray[indexPath.row]
         
         performSegue(withIdentifier: "goToComments", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToComments" {
+            (segue.destination as! CommentsTableViewController).issue = selectedIssue!
+        }
     }
 
     /*
