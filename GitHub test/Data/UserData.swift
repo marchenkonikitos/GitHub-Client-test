@@ -7,12 +7,12 @@
 //
 
 struct UserData: Decodable {
-    var id: Int
-    var avatar_url: String
-    var login: String
-    var url: String
-    var gists_url: String
-    var repos_url: String
-    var name: String
-    var public_repos: Int
+    let id: Int
+    let avatar_url: String
+    let login: String
+    let url: String
+    let gists_url: String
+    let repos_url: String
+    let name: String
+    let public_repos: Int
 }

@@ -10,18 +10,69 @@ import UIKit
 
 class IssueTableViewController: UITableViewController {
     
-    var repository: Repository?
-    
+    var repository = Repository()
+    var issuesArray: [Issues] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let title = repository?.name
+        let title = repository.name
         self.title = title
+        
+        issuesArray = loadIssues()
+        
+        if issuesArray.count == 0 {
+            loadIssueArray()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
+        
+        let addButton = UIButton.init(type: .custom)
+        addButton.setImage(UIImage(named: "add"), for: UIControlState.normal)
+        addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+        let barButton = UIBarButtonItem(customView: addButton)
+        self.navigationItem.rightBarButtonItem = barButton
+    }
+    
+    func loadIssueArray() {
+        let jsonURLString = (repository.url)! + "/issues"
+        let jsonURL = URL(string: jsonURLString)
+        
+        getData(url: jsonURL!)
+    }
+    
+    func getData(url: URL) {
+        URLSession.shared.dataTask(with: url) { (data, response, err) in
+            guard let data = data else { return }
+            guard err == nil else { return }
+            
+            do {
+                let issuesData = try JSONDecoder().decode([IssueData].self, from: data)
+                self.saveIssues(issues: issuesData)
+            } catch {
+                print("error")
+            }
+        }.resume()
+    }
+    
+    func saveIssues(issues: [IssueData]) {
+        
+        for issue in issues {
+            let title = issue.title
+            let comments_url = issue.comments_url
+            let comments = issue.comments
+            let state = issue.state
+            let url = issue.url
+            
+            guard saveIssue(comments_url: comments_url, title: title, comments: comments, state: state, url: url, repository: repository) else { return }
+        }
+    }
+    
+    @objc
+    func addButtonPressed() {
+        self.performSegue(withIdentifier: "goToAddIssue", sender: self)
     }
 
     // MARK: - Table view data source
@@ -33,16 +84,30 @@ class IssueTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        let count = repository!.open_issues_count
+        let count = repository.open_issues_count
         return Int(UInt(count))
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "issueCell", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "issueCell", for: indexPath) as! IssueTableViewCell
+        
+        issuesArray = loadIssues()
+        if (issuesArray.count > 0) && (issuesArray.count > indexPath.row) {
+            let issueForCell = issuesArray[indexPath.row]
+            cell.initCell(issue: issueForCell)
+        }
 
         return cell
+    }
+    
+    var selectedIssue: Issues?
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        issuesArray = loadIssues()
+        selectedIssue = issuesArray[indexPath.row]
+        
+        performSegue(withIdentifier: "goToComments", sender: self)
     }
 
     /*

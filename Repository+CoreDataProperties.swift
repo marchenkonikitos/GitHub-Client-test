@@ -23,7 +23,7 @@ extension Repository {
     @NSManaged public var name: String?
     @NSManaged public var url: String?
     @NSManaged public var open_issues_count: Int32
-    @NSManaged public var issues: NSSet?
+    @NSManaged public var issues: Issues?
 
 }
 

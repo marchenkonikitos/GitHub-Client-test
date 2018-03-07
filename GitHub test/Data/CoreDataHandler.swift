@@ -38,9 +38,9 @@ func saveRepository(id: Int32,name: String, url: String, html_url: String, has_i
     }
 }
 
-func loadRepositories() -> [Repository]? {
+func loadRepositories() -> [Repository] {
     let context = getContext()
-    var repositories: [Repository]? = nil
+    var repositories: [Repository] = []
 
     do {
         repositories = try context.fetch(Repository.fetchRequest())
@@ -51,7 +51,6 @@ func loadRepositories() -> [Repository]? {
     }
 }
 
-//Delete all repositories
 func clearRepositories() -> Bool {
     let context = getContext()
     let delete = NSBatchDeleteRequest(fetchRequest: Repository.fetchRequest())
@@ -65,7 +64,7 @@ func clearRepositories() -> Bool {
 }
 
 //MARK: -Issues
-func saveIssue(comments_url: String, title: String, comments: Int32, state: String, repository: Repository) -> Bool{
+func saveIssue(comments_url: String, title: String, comments: Int32, state: String, url: String, repository: Repository) -> Bool{
     let context = getContext()
     let issue = NSEntityDescription.insertNewObject(forEntityName: "Issues", into: context) as! Issues
     
@@ -84,9 +83,9 @@ func saveIssue(comments_url: String, title: String, comments: Int32, state: Stri
     }
 }
 
-func loadIssues() -> [Issues]? {
+func loadIssues() -> [Issues] {
     let context = getContext()
-    var issues: [Issues]? = nil
+    var issues: [Issues] = []
     
     do {
         issues = try context.fetch(Issues.fetchRequest())
@@ -97,7 +96,6 @@ func loadIssues() -> [Issues]? {
     }
 }
 
-//Delete all repositories
 func clearIssues() -> Bool {
     let context = getContext()
     let delete = NSBatchDeleteRequest(fetchRequest: Issues.fetchRequest())
@@ -109,3 +107,47 @@ func clearIssues() -> Bool {
         return false
     }
 }
+
+//MARK: -Issues
+func saveComment(body: String, html_url: String, issue: Issues) -> Bool {
+    let context = getContext()
+    let comment = NSEntityDescription.insertNewObject(forEntityName: "Comments", into: context) as! Comments
+    
+    comment.body = body
+    comment.html_url = html_url
+    comment.issues = issue
+    
+    do {
+        try context.save()
+        return true
+    } catch {
+        print("\nError save comment")
+        return false
+    }
+}
+
+func loadComments() -> [Comments] {
+    let context = getContext()
+    var comments: [Comments] = []
+    
+    do {
+        comments = try context.fetch(Comments.fetchRequest())
+        return comments
+    } catch {
+        print("\nError loading comments array")
+        return comments
+    }
+}
+
+func clearComments() -> Bool {
+    let context = getContext()
+    let delete = NSBatchDeleteRequest(fetchRequest: Comments.fetchRequest())
+    
+    do {
+        try context.execute(delete)
+        return true
+    } catch {
+        return false
+    }
+}
+

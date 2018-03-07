@@ -9,10 +9,10 @@
 import Foundation
 
 struct ReposData: Decodable {
-    var id: Int32
-    var name: String
-    var url: String
-    var has_issues: Bool
-    var html_url: String
-    var open_issues_count: Int32
+    let id: Int32
+    let name: String
+    let url: String
+    let has_issues: Bool
+    let html_url: String
+    let open_issues_count: Int32
 }

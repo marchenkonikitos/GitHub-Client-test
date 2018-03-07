@@ -13,5 +13,8 @@ class IssueTableViewCell: UITableViewCell {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var countCommentslabel: UILabel!
     
-    
+    func initCell(issue: Issues) {
+        nameLabel.text = issue.title
+        countCommentslabel.text = String(issue.comments) + " comments"
+    }
 }

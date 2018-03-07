@@ -13,4 +13,5 @@ struct IssueData: Decodable {
     let title: String
     let comments: Int32
     let state: String
+    let url: String
 }
