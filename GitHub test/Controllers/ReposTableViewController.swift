@@ -14,19 +14,13 @@ class ReposTableViewController: UITableViewController {
     @IBOutlet var userImage: UIImageView!
     @IBOutlet var numberOfRepos: UILabel!
     
-    var repositoriesArray = loadRepositories()
+    var repositoriesArray: [Repository] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        getData()
         
-        repositoriesArray = loadRepositories()
-        if repositoriesArray.count == 0 {
-            let jsonURLString = UserDefaults.standard.value(forKey: "repos_url") as! String
-            guard let jsonURL = URL(string: jsonURLString) else {
-                return
-            }
-            getData(url: jsonURL)
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,14 +62,21 @@ class ReposTableViewController: UITableViewController {
     }
     
     //MARK: -Get and save repositories and issues data
-    func getData(url: URL) {
-        URLSession.shared.dataTask(with: url) { (data, response, err) in
+    func getData() {
+        let jsonURLString = UserDefaults.standard.value(forKey: "repos_url") as! String
+        guard let jsonURL = URL(string: jsonURLString) else { return }
+        
+        URLSession.shared.dataTask(with: jsonURL) { (data, response, err) in
             guard let data = data else { return }
             guard err == nil else { return }
             
             do {
                 let reposData = try JSONDecoder().decode([ReposData].self, from: data)
-                self.saveRepositories(repos: reposData)
+                self.refreshControl?.endRefreshing()
+                DispatchQueue.main.async {
+                    self.saveRepositories(repos: reposData)
+                    self.tableView.reloadData()
+                }
             } catch {
                 print("error")
             }
@@ -83,6 +84,8 @@ class ReposTableViewController: UITableViewController {
     }
     
     func saveRepositories(repos: [ReposData]) {
+        clearRepositories()
+        
         for repository in repos {
             let id = repository.id
             let name = repository.name
@@ -93,21 +96,8 @@ class ReposTableViewController: UITableViewController {
             
             guard saveRepository(id: id, name: name, url: url, html_url: html_url, has_issue: has_issues, open_issues_count: open_issues_count) != nil else { return }
         }
-    }
-    
-    //MARK: -Reload button
-    @IBAction func reloadButtonPressed(_ sender: Any) {
-        guard clearRepositories() else { return }
-        guard clearIssues() else { return }
         
-        let jsonURLString = UserDefaults.standard.value(forKey: "repos_url") as! String
-        guard let jsonURL = URL(string: jsonURLString) else {
-            return
-        }
-        getData(url: jsonURL)
-        print(loadRepositories())
-        
-        tableView.reloadData()
+        repositoriesArray = loadRepositories()
     }
     
     
