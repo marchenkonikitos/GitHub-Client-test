@@ -2,19 +2,19 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Files/SWIFT/Elements/GitHub test/Comments.swift">
+      location = "group:Comments.swift">
+   </FileRef>
+   <FileRef
+      location = "group:Issues.swift">
+   </FileRef>
+   <FileRef
+      location = "group:Repository.swift">
    </FileRef>
    <FileRef
       location = "group:Comments+CoreDataProperties.swift">
    </FileRef>
    <FileRef
-      location = "group:/Files/SWIFT/Elements/GitHub test/Issues.swift">
-   </FileRef>
-   <FileRef
       location = "group:Issues+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Files/SWIFT/Elements/GitHub test/Repository.swift">
    </FileRef>
    <FileRef
       location = "group:Repository+CoreDataProperties.swift">

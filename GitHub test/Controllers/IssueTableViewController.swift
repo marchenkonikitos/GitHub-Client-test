@@ -74,9 +74,10 @@ class IssueTableViewController: UITableViewController {
     func issuesFilter() {
         issuesArray = loadIssues()
         
-        for count in 0..<(issuesArray.count - 1) {
-            if issuesArray[count] != repository {
-                issuesArray.remove(at: count)
+        issuesArray.forEach { (issue) in
+            if issue.url != (repository.url! + "/issues") {
+                let index = issuesArray.index(of: issue)
+                issuesArray.remove(at: index!)
             }
         }
     }
