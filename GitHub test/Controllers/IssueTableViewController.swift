@@ -76,8 +76,12 @@ class IssueTableViewController: UITableViewController {
         
         issuesArray.forEach { (issue) in
             if issue.url != (repository.url! + "/issues") {
-                let index = issuesArray.index(of: issue)
-                issuesArray.remove(at: index!)
+                
+                guard let index = issuesArray.index(of: issue) else {
+                    return
+                }
+                
+                issuesArray.remove(at: index)
             }
         }
     }
