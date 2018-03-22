@@ -64,12 +64,12 @@ class IssueTableViewController: UITableViewController {
         
         for issue in issues {
             let title = issue.title
-            let comments_url = issue.comments_url
+            let comments_url = issue.commentsUrl
             let comments = issue.comments
             let state = issue.state
             let url = issue.url
             
-            guard saveIssue(comments_url: comments_url, title: title, comments: comments, state: state, url: url, repository: repository) else { return }
+            guard saveIssue(commentsUrl: comments_url, title: title, comments: comments, state: state, url: url, repository: repository) else { return }
         }
         issuesFilter()
     }
@@ -107,7 +107,7 @@ class IssueTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        let count = repository.open_issues_count
+        let count = repository.openIssuesCount
         return Int(UInt(count))
     }
 

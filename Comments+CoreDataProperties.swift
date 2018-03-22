@@ -17,6 +17,6 @@ extension Comments {
     }
 
     @NSManaged public var body: String?
-    @NSManaged public var html_url: String?
+    @NSManaged public var htmlUrl: String?
     @NSManaged public var issues: Issue?
 }

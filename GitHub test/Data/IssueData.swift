@@ -9,9 +9,17 @@
 import Foundation
 
 struct IssueData: Decodable {
-    let comments_url: String
+    let commentsUrl: String
     let title: String
     let comments: Int32
     let state: String
     let url: String
+    
+    enum CodingKeys: String, CodingKey {
+        case commentsUrl = "comments_url"
+        case title
+        case comments
+        case state
+        case url
+    }
 }

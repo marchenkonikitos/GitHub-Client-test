@@ -50,9 +50,9 @@ class CommentsTableViewController: UITableViewController {
         
         for comment in comments {
             let body = comment.body
-            let html_url = comment.html_url
+            let html_url = comment.htmlUrl
             
-            guard saveComment(body: body, html_url: html_url, issue: issue) else { return }
+            guard saveComment(body: body, htmlUrl: html_url, issue: issue) else { return }
         }
         
         commentsFilter()

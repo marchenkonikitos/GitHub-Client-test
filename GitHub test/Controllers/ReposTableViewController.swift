@@ -67,6 +67,8 @@ class ReposTableViewController: UITableViewController {
         guard let jsonURL = URL(string: jsonURLString) else { return }
         
         URLSession.shared.dataTask(with: jsonURL) { (data, response, err) in
+            let stringFromData = String(data: data!, encoding: .utf8)
+            //print(stringFromData)
             guard let data = data else { return }
             guard err == nil else { return }
             
@@ -90,11 +92,11 @@ class ReposTableViewController: UITableViewController {
             let id = repository.id
             let name = repository.name
             let url = repository.url
-            let has_issues = repository.has_issues
-            let html_url = repository.html_url
-            let open_issues_count = repository.open_issues_count
+            let hasIssues = repository.hasIssues
+            let htmlUrl = repository.htmlUrl
+            let openIssuesCount = repository.openIssuesCount
             
-            guard saveRepository(id: id, name: name, url: url, html_url: html_url, has_issue: has_issues, open_issues_count: open_issues_count) != nil else { return }
+            guard saveRepository(id: id, name: name, url: url, htmlUrl: htmlUrl, hasIssues: hasIssues, openIssuesCount: openIssuesCount) != nil else { return }
         }
         
         repositoriesArray = loadRepositories()

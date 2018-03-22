@@ -54,7 +54,8 @@ class LogInController: UIViewController {
         let base64Credentials = credentialData.base64EncodedString(options: [])
         let headers = ["Authorization": "Basic \(base64Credentials)"]
         
-        Alamofire.request(url!, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers)
+        Alamofire.request(url!, method: .get, parameters: nil,
+                          encoding: URLEncoding.default, headers: headers)
         .validate()
             .responseJSON { responce in
                 if responce.result.value != nil {
@@ -129,13 +130,13 @@ class LogInController: UIViewController {
     
     func saveData (userData: UserData) {
         UserDefaults.standard.set(userData.id, forKey: "userId")
-        UserDefaults.standard.set(userData.avatar_url, forKey: "avatar_url")
+        UserDefaults.standard.set(userData.avatarUrl, forKey: "avatar_url")
         UserDefaults.standard.set(userData.login, forKey: "login")
-        UserDefaults.standard.set(userData.gists_url, forKey: "userUrl")
-        UserDefaults.standard.set(userData.gists_url, forKey: "gists_url")
-        UserDefaults.standard.set(userData.repos_url, forKey: "repos_url")
+        UserDefaults.standard.set(userData.gistsUrl, forKey: "userUrl")
+        UserDefaults.standard.set(userData.gistsUrl, forKey: "gists_url")
+        UserDefaults.standard.set(userData.reposUrl, forKey: "repos_url")
         UserDefaults.standard.set(userData.name, forKey: "userName")
-        UserDefaults.standard.set(userData.public_repos, forKey: "numberOfRepos")
+        UserDefaults.standard.set(userData.publicRepos, forKey: "numberOfRepos")
     }
 
 }

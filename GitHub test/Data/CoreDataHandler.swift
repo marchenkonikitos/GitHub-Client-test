@@ -18,16 +18,16 @@ private func getContext() -> NSManagedObjectContext {
 
 //MARK: -Repositories
 //Save repositories
-func saveRepository(id: Int32,name: String, url: String, html_url: String, has_issue: Bool, open_issues_count: Int32) -> Repository? {
+func saveRepository(id: Int32,name: String, url: String, htmlUrl: String, hasIssues: Bool, openIssuesCount: Int32) -> Repository? {
     let context = getContext()
     let repos = NSEntityDescription.insertNewObject(forEntityName: "Repository", into: context) as! Repository
     
     repos.id = id
     repos.name = name
-    repos.has_issues = has_issue
-    repos.html_url = html_url
+    repos.hasIssues = hasIssues
+    repos.htmlUrl = htmlUrl
     repos.url = url
-    repos.open_issues_count = open_issues_count
+    repos.openIssuesCount = openIssuesCount
 
     do {
         try context.save()
@@ -64,12 +64,12 @@ func clearRepositories() -> Bool {
 }
 
 //MARK: -Issues
-func saveIssue(comments_url: String, title: String, comments: Int32, state: String, url: String, repository: Repository) -> Bool{
+func saveIssue(commentsUrl: String, title: String, comments: Int32, state: String, url: String, repository: Repository) -> Bool{
     let context = getContext()
     let issue = NSEntityDescription.insertNewObject(forEntityName: "Issues", into: context) as! Issues
     
     issue.title = title
-    issue.comments_url = comments_url
+    issue.commentsUrl = commentsUrl
     issue.comments = comments
     issue.state = state
     issue.repository = repository
@@ -110,12 +110,12 @@ func clearIssues() -> Bool {
 }
 
 //MARK: -Issues
-func saveComment(body: String, html_url: String, issue: Issues) -> Bool {
+func saveComment(body: String, htmlUrl: String, issue: Issues) -> Bool {
     let context = getContext()
     let comment = NSEntityDescription.insertNewObject(forEntityName: "Comments", into: context) as! Comments
     
     comment.body = body
-    comment.html_url = html_url
+    comment.htmlUrl = htmlUrl
     comment.issues = issue
     
     do {

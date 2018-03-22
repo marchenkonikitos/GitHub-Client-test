@@ -8,11 +8,22 @@
 
 struct UserData: Decodable {
     let id: Int
-    let avatar_url: String
+    let avatarUrl: String
     let login: String
     let url: String
-    let gists_url: String
-    let repos_url: String
+    let gistsUrl: String
+    let reposUrl: String
     let name: String
-    let public_repos: Int
+    let publicRepos: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case avatarUrl = "avatar_url"
+        case login
+        case url
+        case gistsUrl = "gists_url"
+        case reposUrl = "repos_url"
+        case name
+        case publicRepos = "public_repos"
+    }
 }
