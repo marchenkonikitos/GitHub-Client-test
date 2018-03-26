@@ -7,15 +7,13 @@
 //
 
 import UIKit
-import Moya
 
 class IssueTableViewController: UITableViewController {
     
     var repository = Repository()
     var issuesArray: [Issues] = []
     let variable = Variables()
-    
-    let provider = MoyaProvider<IssuesTarget>()
+    let issueService = IssuesService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,49 +35,10 @@ class IssueTableViewController: UITableViewController {
     }
     
     func getData() {
-        provider.request(.getIssues(username: variable.login, repos: repository.name!)) { result in
-            switch result {
-            case let .success(moyaResponse):
-                let data = moyaResponse.data
-                
-                do {
-                    let issuesData = try JSONDecoder().decode([IssueData].self, from: data)
-                    self.refreshControl?.endRefreshing()
-                    DispatchQueue.main.async {
-                        self.saveIssues(issues: issuesData)
-                        self.tableView.reloadData()
-                    }
-                } catch {
-                    print("error")
-                }
-                
-            case let .failure(error):
-                print(error)
-            }
+        issueService.getIssues(repository: repository) {
+            self.issuesArray = self.issueService.loadIssues()
+            self.tableView.reloadData()
         }
-    }
-    
-    func saveIssues(issues: [IssueData]) {
-        clearIssues()
-        
-        for issue in issues {
-            let title = issue.title
-            let comments_url = issue.commentsUrl
-            let comments = issue.comments
-            let state = issue.state
-            let url = issue.url
-            let number = issue.number
-            
-            guard saveIssue(commentsUrl: comments_url, title: title, comments: comments, state: state, url: url, number: Int32(number), repository: repository) else { return }
-        }
-        issuesFilter()
-    }
-    
-    func issuesFilter() {
-        issuesArray = loadIssues()
-        
-        issuesArray.filter{ $0.repository == repository }
-        
     }
     
     @objc
@@ -96,8 +55,7 @@ class IssueTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        let count = repository.openIssuesCount
-        return Int(UInt(count))
+        return issuesArray.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

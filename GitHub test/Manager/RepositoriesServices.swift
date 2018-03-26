@@ -16,7 +16,6 @@ class RepositoryServices {
     private let repositories = RepositoriesStorage()
     
     func getRepositories(success: @escaping () -> Void) {
-        var repos: [Repository] = []
         provider.request(.getRepositories(username: variable.login)) { response in
             if let value = response.value, value.statusCode == 200 {
                 let data = value.data

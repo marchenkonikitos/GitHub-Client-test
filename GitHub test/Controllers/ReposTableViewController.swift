@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Alamofire
-import Moya
 
 class ReposTableViewController: UITableViewController {
     
@@ -18,6 +16,7 @@ class ReposTableViewController: UITableViewController {
     private var repositoriesArray: [Repository] = []
     private let variable = Variables()
     private let repositoriesService = RepositoryServices()
+    private let userServices = UserServices()
     
 
     override func viewDidLoad() {
@@ -40,10 +39,9 @@ class ReposTableViewController: UITableViewController {
         self.userImage.layer.masksToBounds = true
         self.userImage.layer.cornerRadius = self.userImage.frame.width / 2
         
-        let imageURL = URL(string: UserDefaults.standard.value(forKey: "avatar_url") as! String)
-        let imageData = NSData(contentsOf: imageURL!)
+        let imageData = userServices.imageData()
         
-        self.userImage.image = UIImage(data: imageData! as Data)
+        self.userImage.image = UIImage(data: imageData as Data)
         
         let tapGesture = UILongPressGestureRecognizer(target: self, action: #selector(imageTapped))
         tapGesture.minimumPressDuration = 0.0

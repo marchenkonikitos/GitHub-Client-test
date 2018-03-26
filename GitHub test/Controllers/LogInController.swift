@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Locksmith
-import Moya
 
 class LogInController: UIViewController {
     

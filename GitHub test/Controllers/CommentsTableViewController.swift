@@ -7,15 +7,14 @@
 //
 
 import UIKit
-import Moya
 
 class CommentsTableViewController: UITableViewController {
     
     var issue = Issues()
     var repository = Repository()
     var commentsArray: [Comments] = []
-    let provider = MoyaProvider<CommentTarget>()
     let variable = Variables()
+    let commentService = CommentsServices()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,46 +26,12 @@ class CommentsTableViewController: UITableViewController {
     }
     
     func getData() {
-        provider.request(.getComments(username: variable.login, repository: repository.name!, number: Int(issue.number))) { result in
-            switch result {
-            case let .success(moyaResponse):
-                let data = moyaResponse.data
-                
-                do {
-                    let commentsData = try JSONDecoder().decode([CommentData].self, from: data)
-                    self.refreshControl?.endRefreshing()
-                    DispatchQueue.main.async {
-                        self.saveComments(comments: commentsData)
-                        self.tableView.reloadData()
-                    }
-                } catch {
-                    print("error")
-                }
-                
-            case let .failure(error):
-                print(error)
-            }
+        commentService.getComments(repository: repository, issue: issue) {
+            self.commentsArray = self.commentService.loadIssues()
+            self.tableView.reloadData()
         }
     }
     
-    func saveComments(comments: [CommentData]) {
-        clearComments()
-        
-        for comment in comments {
-            let body = comment.body
-            let html_url = comment.htmlUrl
-            
-            guard saveComment(body: body, htmlUrl: html_url, issue: issue) else { return }
-        }
-        
-        commentsFilter()
-    }
-    
-    func commentsFilter() {
-        commentsArray = loadComments()
-        
-        commentsArray.filter { $0.issues == issue }
-    }
 
     // MARK: - Table view data source
 
@@ -77,8 +42,7 @@ class CommentsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        let count = issue.comments
-        return Int(count)
+        return commentsArray.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

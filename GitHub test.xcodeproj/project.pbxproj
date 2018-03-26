@@ -33,6 +33,10 @@
 		1AD261BB2068F9B8006C4F57 /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261BA2068F9B8006C4F57 /* UserStorage.swift */; };
 		1AD261BD20691C97006C4F57 /* RepositoriesServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261BC20691C97006C4F57 /* RepositoriesServices.swift */; };
 		1AD261BF20691EA3006C4F57 /* RepositoriesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261BE20691EA3006C4F57 /* RepositoriesStorage.swift */; };
+		1AD261C120692A5A006C4F57 /* IssuesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261C020692A5A006C4F57 /* IssuesStorage.swift */; };
+		1AD261C520692C27006C4F57 /* IssuesServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261C420692C27006C4F57 /* IssuesServices.swift */; };
+		1AD261C720692EFB006C4F57 /* CommentsServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261C620692EFB006C4F57 /* CommentsServices.swift */; };
+		1AD261C920692F09006C4F57 /* CommentsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261C820692F09006C4F57 /* CommentsStorage.swift */; };
 		5D0572CB7178EBCE5FF962BA /* Pods_GitHub_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA29D623ACA89062E6B097DF /* Pods_GitHub_test.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +70,10 @@
 		1AD261BA2068F9B8006C4F57 /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
 		1AD261BC20691C97006C4F57 /* RepositoriesServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesServices.swift; sourceTree = "<group>"; };
 		1AD261BE20691EA3006C4F57 /* RepositoriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesStorage.swift; sourceTree = "<group>"; };
+		1AD261C020692A5A006C4F57 /* IssuesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesStorage.swift; sourceTree = "<group>"; };
+		1AD261C420692C27006C4F57 /* IssuesServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesServices.swift; sourceTree = "<group>"; };
+		1AD261C620692EFB006C4F57 /* CommentsServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsServices.swift; sourceTree = "<group>"; };
+		1AD261C820692F09006C4F57 /* CommentsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsStorage.swift; sourceTree = "<group>"; };
 		57E527C0CE54960E2DA1CAB9 /* Pods-GitHub test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHub test.release.xcconfig"; path = "Pods/Target Support Files/Pods-GitHub test/Pods-GitHub test.release.xcconfig"; sourceTree = "<group>"; };
 		7D46DE56CE9744413EAA9208 /* Pods-GitHub test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHub test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GitHub test/Pods-GitHub test.debug.xcconfig"; sourceTree = "<group>"; };
 		EA29D623ACA89062E6B097DF /* Pods_GitHub_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHub_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +176,8 @@
 			children = (
 				1A370D942068ED6400A13348 /* UserServices.swift */,
 				1AD261BC20691C97006C4F57 /* RepositoriesServices.swift */,
+				1AD261C420692C27006C4F57 /* IssuesServices.swift */,
+				1AD261C620692EFB006C4F57 /* CommentsServices.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -177,6 +187,8 @@
 			children = (
 				1AD261BA2068F9B8006C4F57 /* UserStorage.swift */,
 				1AD261BE20691EA3006C4F57 /* RepositoriesStorage.swift */,
+				1AD261C020692A5A006C4F57 /* IssuesStorage.swift */,
+				1AD261C820692F09006C4F57 /* CommentsStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -363,17 +375,21 @@
 				1A2BFD732048922C00B19177 /* ReposData.xcdatamodeld in Sources */,
 				1A2BFD692048854600B19177 /* CoreDataHandler.swift in Sources */,
 				1A6D7E93204B29B700416370 /* RepositoryTableViewCell.swift in Sources */,
+				1AD261C920692F09006C4F57 /* CommentsStorage.swift in Sources */,
 				1A2BFD6320482D2700B19177 /* LogInController.swift in Sources */,
 				1A966A9D204F10DA003AEA9E /* IssueTableViewController.swift in Sources */,
 				1A2BFD672048812D00B19177 /* UserData.swift in Sources */,
 				1AD261BB2068F9B8006C4F57 /* UserStorage.swift in Sources */,
 				1A5A26CA204C2C26008E1F2A /* IssueData.swift in Sources */,
+				1AD261C720692EFB006C4F57 /* CommentsServices.swift in Sources */,
 				1A370D952068ED6400A13348 /* UserServices.swift in Sources */,
 				1A370D8B2068E06B00A13348 /* RepositoriesAPI.swift in Sources */,
+				1AD261C120692A5A006C4F57 /* IssuesStorage.swift in Sources */,
 				1A16B7022050231D00653DBB /* CommentData.swift in Sources */,
 				1A2BFD65204875ED00B19177 /* ReposTableViewController.swift in Sources */,
 				1AD261BF20691EA3006C4F57 /* RepositoriesStorage.swift in Sources */,
 				1A56EC2A204976B400421B9B /* ReposData.swift in Sources */,
+				1AD261C520692C27006C4F57 /* IssuesServices.swift in Sources */,
 				1A16B6FE2050131E00653DBB /* CommentsTableViewController.swift in Sources */,
 				1AD261BD20691C97006C4F57 /* RepositoriesServices.swift in Sources */,
 				1A16B7002050132C00653DBB /* CommentsTableViewCell.swift in Sources */,

@@ -16,17 +16,16 @@ func getContext() -> NSManagedObjectContext {
     return appDelegate.persistentContainer.viewContext
 }
 
-//MARK: -Repositories
-//Save repositories
-func saveRepository(context: NSManagedObjectContext) {
-    
+//Save data
+func saveData(context: NSManagedObjectContext) {
     do {
         try context.save()
     } catch {
-        print("\nError save repository")
+        print("Problem with save to CoreData")
     }
 }
 
+//MARK: -Repositories
 func loadRepositories() -> [Repository] {
     let context = getContext()
     var repositories: [Repository] = []
@@ -53,27 +52,6 @@ func clearRepositories() -> Bool {
 }
 
 //MARK: -Issues
-func saveIssue(commentsUrl: String, title: String, comments: Int32, state: String, url: String, number: Int32, repository: Repository) -> Bool{
-    let context = getContext()
-    let issue = NSEntityDescription.insertNewObject(forEntityName: "Issues", into: context) as! Issues
-    
-    issue.title = title
-    issue.commentsUrl = commentsUrl
-    issue.comments = comments
-    issue.state = state
-    issue.repository = repository
-    issue.url = url
-    issue.number = number
-    
-    do {
-        try context.save()
-        return true
-    } catch {
-        print("\nError save issue")
-        return false
-    }
-}
-
 func loadIssues() -> [Issues] {
     let context = getContext()
     var issues: [Issues] = []
@@ -99,24 +77,7 @@ func clearIssues() -> Bool {
     }
 }
 
-//MARK: -Issues
-func saveComment(body: String, htmlUrl: String, issue: Issues) -> Bool {
-    let context = getContext()
-    let comment = NSEntityDescription.insertNewObject(forEntityName: "Comments", into: context) as! Comments
-    
-    comment.body = body
-    comment.htmlUrl = htmlUrl
-    comment.issues = issue
-    
-    do {
-        try context.save()
-        return true
-    } catch {
-        print("\nError save comment")
-        return false
-    }
-}
-
+//MARK: -Comments
 func loadComments() -> [Comments] {
     let context = getContext()
     var comments: [Comments] = []

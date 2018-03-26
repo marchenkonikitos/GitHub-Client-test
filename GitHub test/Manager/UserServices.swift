@@ -56,4 +56,11 @@ class UserServices {
             success()
         }
     }
+    
+    func imageData() -> NSData {
+        let imageURL = URL(string: UserDefaults.standard.value(forKey: "avatar_url") as! String)
+        let data = NSData(contentsOf: imageURL!)
+        
+        return data!
+    }
 }

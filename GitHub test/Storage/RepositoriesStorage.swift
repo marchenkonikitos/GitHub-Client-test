@@ -22,7 +22,7 @@ class RepositoriesStorage {
             repos.htmlUrl = repository.htmlUrl
             repos.openIssuesCount = repository.openIssuesCount
             
-            saveRepository(context: context)
+            saveData(context: context)
         }
     }
     
