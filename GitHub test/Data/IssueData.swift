@@ -14,6 +14,7 @@ struct IssueData: Decodable {
     let comments: Int32
     let state: String
     let url: String
+    let number: Int
     
     enum CodingKeys: String, CodingKey {
         case commentsUrl = "comments_url"
@@ -21,5 +22,6 @@ struct IssueData: Decodable {
         case comments
         case state
         case url
+        case number
     }
 }

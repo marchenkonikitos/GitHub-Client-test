@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Moya
 
 class ReposTableViewController: UITableViewController {
     
@@ -15,6 +16,8 @@ class ReposTableViewController: UITableViewController {
     @IBOutlet var numberOfRepos: UILabel!
     
     var repositoriesArray: [Repository] = []
+    let provider = MoyaProvider<RepositoriesServices>()
+    let variable = Variables()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,26 +66,27 @@ class ReposTableViewController: UITableViewController {
     
     //MARK: -Get and save repositories and issues data
     func getData() {
-        let jsonURLString = UserDefaults.standard.value(forKey: "repos_url") as! String
-        guard let jsonURL = URL(string: jsonURLString) else { return }
-        
-        URLSession.shared.dataTask(with: jsonURL) { (data, response, err) in
-            let stringFromData = String(data: data!, encoding: .utf8)
-            //print(stringFromData)
-            guard let data = data else { return }
-            guard err == nil else { return }
-            
-            do {
-                let reposData = try JSONDecoder().decode([ReposData].self, from: data)
-                self.refreshControl?.endRefreshing()
-                DispatchQueue.main.async {
-                    self.saveRepositories(repos: reposData)
-                    self.tableView.reloadData()
+        provider.request(.getRepositories(username: variable.login)) { result in
+            switch result {
+            case let .success(moyaResponse):
+                let data = moyaResponse.data
+                let dataSTR = String(data: data, encoding: .utf8)
+                print(dataSTR)
+                do {
+                    let repositoriesData = try JSONDecoder().decode([ReposData].self, from: data)
+                    self.refreshControl?.endRefreshing()
+                    DispatchQueue.main.async {
+                        self.saveRepositories(repos: repositoriesData)
+                        self.tableView.reloadData()
+                    }
+                } catch {
+                    print("error")
                 }
-            } catch {
-                print("error")
+                
+            case let .failure(error):
+                print(error)
             }
-        }.resume()
+        }
     }
     
     func saveRepositories(repos: [ReposData]) {

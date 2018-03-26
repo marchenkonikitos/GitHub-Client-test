@@ -23,8 +23,6 @@ class IssueTableViewController: UITableViewController {
         let title = repository.name
         self.title = title
         
-        
-        
         loadIssueArray()
     }
     
@@ -52,10 +50,6 @@ class IssueTableViewController: UITableViewController {
             switch result {
             case let .success(moyaResponse):
                 let data = moyaResponse.data
-                let statusCode = moyaResponse.statusCode
-                
-                print(statusCode)
-                print(String(data: data, encoding: .utf8)!)
                 
                 do {
                     let issuesData = try JSONDecoder().decode([IssueData].self, from: data)
@@ -68,7 +62,6 @@ class IssueTableViewController: UITableViewController {
                     print("error")
                 }
                 
-            // do something in your app
             case let .failure(error):
                 print(error)
             }
@@ -84,8 +77,9 @@ class IssueTableViewController: UITableViewController {
             let comments = issue.comments
             let state = issue.state
             let url = issue.url
+            let number = issue.number
             
-            guard saveIssue(commentsUrl: comments_url, title: title, comments: comments, state: state, url: url, repository: repository) else { return }
+            guard saveIssue(commentsUrl: comments_url, title: title, comments: comments, state: state, url: url, number: Int32(number), repository: repository) else { return }
         }
         issuesFilter()
     }
@@ -95,18 +89,6 @@ class IssueTableViewController: UITableViewController {
         
         issuesArray.filter{ $0.repository == repository }
         
-        /*
-        issuesArray.forEach { (issue) in
-            if issue.url != (repository.url! + "/issues") {
-                
-                guard let index = issuesArray.index(of: issue) else {
-                    return
-                }
-                
-                issuesArray.remove(at: index)
-            }
-        }
-         */
     }
     
     @objc
@@ -150,6 +132,7 @@ class IssueTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToComments" {
             (segue.destination as! CommentsTableViewController).issue = selectedIssue!
+            (segue.destination as! CommentsTableViewController).repository = repository
         }
     }
 

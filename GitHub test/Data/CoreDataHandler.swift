@@ -64,7 +64,7 @@ func clearRepositories() -> Bool {
 }
 
 //MARK: -Issues
-func saveIssue(commentsUrl: String, title: String, comments: Int32, state: String, url: String, repository: Repository) -> Bool{
+func saveIssue(commentsUrl: String, title: String, comments: Int32, state: String, url: String, number: Int32, repository: Repository) -> Bool{
     let context = getContext()
     let issue = NSEntityDescription.insertNewObject(forEntityName: "Issues", into: context) as! Issues
     
@@ -74,6 +74,7 @@ func saveIssue(commentsUrl: String, title: String, comments: Int32, state: Strin
     issue.state = state
     issue.repository = repository
     issue.url = url
+    issue.number = number
     
     do {
         try context.save()

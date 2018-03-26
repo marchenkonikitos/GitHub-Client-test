@@ -23,6 +23,7 @@ extension Issues {
     @NSManaged public var repository: Repository?
     @NSManaged public var comment: Comments?
     @NSManaged public var url: String?
+    @NSManaged public var number: Int32?
 
 }
 

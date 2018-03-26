@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import Moya
 
 class CommentsTableViewController: UITableViewController {
     
     var issue = Issues()
+    var repository = Repository()
     var commentsArray: [Comments] = []
+    let provider = MoyaProvider<CommentServices>()
+    let variable = Variables()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,17 +36,26 @@ class CommentsTableViewController: UITableViewController {
     }
     
     func getData(url: URL) {
-        URLSession.shared.dataTask(with: url) { (data, response, err) in
-            guard let data = data else { return }
-            guard err == nil else { return }
-            
-            do {
-                let commentsData = try JSONDecoder().decode([CommentData].self, from: data)
-                self.saveComments(comments: commentsData)
-            } catch {
-                print("error")
+        provider.request(.getComments(username: variable.login, repository: repository.name!, number: Int(issue.number))) { result in
+            switch result {
+            case let .success(moyaResponse):
+                let data = moyaResponse.data
+                
+                do {
+                    let commentsData = try JSONDecoder().decode([CommentData].self, from: data)
+                    self.refreshControl?.endRefreshing()
+                    DispatchQueue.main.async {
+                        self.saveComments(comments: commentsData)
+                        self.tableView.reloadData()
+                    }
+                } catch {
+                    print("error")
+                }
+                
+            case let .failure(error):
+                print(error)
             }
-        }.resume()
+        }
     }
     
     func saveComments(comments: [CommentData]) {
