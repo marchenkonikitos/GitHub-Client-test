@@ -14,7 +14,7 @@ class IssuesService {
     private let variable = Variables()
     private let issues = IssuesStorage()
     
-    func getIssues(repository: Repository, success: @escaping () -> Void) {
+    func getIssues(repository: Repository, success: @escaping () -> Void, failed: @escaping (String) -> Void) {
         provider.request(.getIssues(username: variable.login, repos: repository.name!)) { response in
             if let value = response.value, value.statusCode == 200 {
                 let data = value.data
@@ -28,7 +28,10 @@ class IssuesService {
                         success()
                     }
                 } catch {
+                    failed((response.error?.localizedDescription)!)
                 }
+            } else {
+                failed((response.error?.localizedDescription)!)
             }
         }
     }

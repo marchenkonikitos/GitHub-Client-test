@@ -14,7 +14,7 @@ class CommentsServices {
     private let variable = Variables()
     private let comments = CommentsStorage()
     
-    func getComments(repository: Repository, issue: Issues, success: @escaping () -> Void) {
+    func getComments(repository: Repository, issue: Issues, success: @escaping () -> Void, failed: @escaping (String) -> Void) {
         provider.request(.getComments(username: variable.login, repository: repository.name!, number: Int(issue.number))) { response in
             if let value = response.value, value.statusCode == 200 {
                 let data = value.data
@@ -28,7 +28,10 @@ class CommentsServices {
                         success()
                     }
                 } catch {
+                    failed((response.error?.localizedDescription)!)
                 }
+            } else {
+                failed((response.error?.localizedDescription)!)
             }
         }
     }

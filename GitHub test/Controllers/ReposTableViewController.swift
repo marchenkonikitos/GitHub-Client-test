@@ -65,10 +65,14 @@ class ReposTableViewController: UITableViewController {
     
     //MARK: -Get and save repositories and issues data
     func getData() {
-        repositoriesService.getRepositories {
+        repositoriesService.getRepositories(success: {
             self.repositoriesArray = self.repositoriesService.loadRepos()
             self.tableView.reloadData()
-        }
+        }, failed: { error in
+            let alert = UIAlertController(title: "Problem", message: error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        })
     }
     
     

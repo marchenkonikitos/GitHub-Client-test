@@ -35,10 +35,15 @@ class IssueTableViewController: UITableViewController {
     }
     
     func getData() {
-        issueService.getIssues(repository: repository) {
+        issueService.getIssues(repository: repository, success: {
             self.issuesArray = self.issueService.loadIssues()
             self.tableView.reloadData()
-        }
+        }, failed: { error in
+            let alert = UIAlertController(title: "Problem", message: error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+            })
     }
     
     @objc
