@@ -11,7 +11,7 @@ import CoreData
 
 class CommentsStorage {
     func save(comments: [CommentData], issue: Issues) {
-        for comment in comments {
+        comments.forEach { (comment) in
             let context = getContext()
             let commentObj = NSEntityDescription.insertNewObject(forEntityName: "Comments", into: context) as! Comments
             

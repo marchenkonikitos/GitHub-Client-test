@@ -11,7 +11,7 @@ import CoreData
 
 class IssuesStorage {
     func save(issues: [IssueData], repository: Repository) {
-        for issue in issues {
+        issues.forEach { (issue) in
             let context = getContext()
             let issueObj = NSEntityDescription.insertNewObject(forEntityName: "Issues", into: context) as! Issues
             

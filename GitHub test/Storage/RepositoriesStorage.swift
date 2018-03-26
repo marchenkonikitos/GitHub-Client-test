@@ -11,7 +11,7 @@ import CoreData
 
 class RepositoriesStorage {
     func save(repositories: [ReposData]) {
-        for repository in repositories {
+        repositories.forEach { (repository) in
             let context = getContext()
             let repos = NSEntityDescription.insertNewObject(forEntityName: "Repository", into: context) as! Repository
             
