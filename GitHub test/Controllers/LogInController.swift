@@ -21,10 +21,10 @@ class LogInController: UIViewController {
 
         signButton.layer.cornerRadius = 10
         
-        userService.getUserLogin {
-            userService.getUserLogin {
-                loginComplete()
-            }
+        userService.getHash(success: {
+            self.loginComplete()
+        }) {
+            self.wrongData()
         }
     }
 

@@ -49,11 +49,15 @@ class UserServices {
         }
     }
     
-    func getUserLogin(success: () -> Void) {
+    func getHash(success: @escaping () -> Void, failed: @escaping () -> Void) {
         let login = user.getUserLogin()
         
         if login != "" {
-            success()
+            getUser(hash: login, success: {
+                success()
+            }, failed: {
+                failed()
+            })
         }
     }
     
