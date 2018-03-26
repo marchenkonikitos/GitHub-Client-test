@@ -7,17 +7,23 @@
 //
 
 import UIKit
+import Moya
 
 class IssueTableViewController: UITableViewController {
     
     var repository = Repository()
     var issuesArray: [Issues] = []
+    let variable = Variables()
+    
+    let provider = MoyaProvider<IssuesServices>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let title = repository.name
         self.title = title
+        
+        
         
         loadIssueArray()
     }
@@ -42,21 +48,31 @@ class IssueTableViewController: UITableViewController {
     }
     
     func getData(url: URL) {
-        URLSession.shared.dataTask(with: url) { (data, response, err) in
-            guard let data = data else { return }
-            guard err == nil else { return }
-            
-            do {
-                let issuesData = try JSONDecoder().decode([IssueData].self, from: data)
-                self.refreshControl?.endRefreshing()
-                DispatchQueue.main.async {
-                    self.saveIssues(issues: issuesData)
-                    self.tableView.reloadData()
+        provider.request(.getIssues(username: variable.login, repos: repository.name!)) { result in
+            switch result {
+            case let .success(moyaResponse):
+                let data = moyaResponse.data
+                let statusCode = moyaResponse.statusCode
+                
+                print(statusCode)
+                print(String(data: data, encoding: .utf8)!)
+                
+                do {
+                    let issuesData = try JSONDecoder().decode([IssueData].self, from: data)
+                    self.refreshControl?.endRefreshing()
+                    DispatchQueue.main.async {
+                        self.saveIssues(issues: issuesData)
+                        self.tableView.reloadData()
+                    }
+                } catch {
+                    print("error")
                 }
-            } catch {
-                print("error")
+                
+            // do something in your app
+            case let .failure(error):
+                print(error)
             }
-        }.resume()
+        }
     }
     
     func saveIssues(issues: [IssueData]) {

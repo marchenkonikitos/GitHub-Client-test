@@ -1,15 +1,34 @@
 PODS:
-  - Alamofire (4.6.0)
+  - Alamofire (4.7.0)
   - Locksmith (4.0.0)
+  - Moya (10.0.2):
+    - Moya/Core (= 10.0.2)
+  - Moya-ObjectMapper (2.5):
+    - Moya-ObjectMapper/Core (= 2.5)
+  - Moya-ObjectMapper/Core (2.5):
+    - Moya (~> 10.0.0)
+    - ObjectMapper (~> 3.0.0)
+  - Moya/Core (10.0.2):
+    - Alamofire (~> 4.1)
+    - Result (~> 3.0)
+  - ObjectMapper (3.0.0)
+  - Result (3.2.4)
 
 DEPENDENCIES:
   - Alamofire
   - Locksmith
+  - Moya
+  - Moya-ObjectMapper
+  - ObjectMapper
 
 SPEC CHECKSUMS:
-  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
+  Moya: 2b0531a9fef318e0bc484030c3db1e6f279ccb66
+  Moya-ObjectMapper: 167adf69db0298bf3a19ea05cb9a16ee117c8ef5
+  ObjectMapper: 92230db59bf8f341a5c3a3cf0b9fbdde3cf0d87f
+  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
 
-PODFILE CHECKSUM: e5fe84cc94c34e96c81c3b6d2cce1a9900827967
+PODFILE CHECKSUM: fab8a3ef50cb658ce6790233803818fb32f58cbd
 
 COCOAPODS: 1.3.1
