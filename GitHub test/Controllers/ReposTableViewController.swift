@@ -39,7 +39,7 @@ class ReposTableViewController: UITableViewController {
         self.userImage.layer.masksToBounds = true
         self.userImage.layer.cornerRadius = self.userImage.frame.width / 2
         
-        let imageData = userServices.imageData()
+        let imageData = userServices.getAvatar()
         
         self.userImage.image = UIImage(data: imageData as Data)
         

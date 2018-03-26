@@ -28,6 +28,7 @@ class UserStorage {
     }
     
     func getUserLogin() -> String{
+        keyChain.delete("base64Credentials")
         if let hash = keyChain.get("base64Credentials") {
             return hash
         }
