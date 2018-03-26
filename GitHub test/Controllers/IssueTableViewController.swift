@@ -15,15 +15,13 @@ class IssueTableViewController: UITableViewController {
     var issuesArray: [Issues] = []
     let variable = Variables()
     
-    let provider = MoyaProvider<IssuesServices>()
+    let provider = MoyaProvider<IssuesTarget>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let title = repository.name
         self.title = title
-        
-        loadIssueArray()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,18 +32,11 @@ class IssueTableViewController: UITableViewController {
         addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         let barButton = UIBarButtonItem(customView: addButton)
         self.navigationItem.rightBarButtonItem = barButton
+        
+        getData()
     }
     
-    func loadIssueArray() {
-        let jsonURLString = (repository.url)! + "/issues"
-        let jsonURL = URL(string: jsonURLString)
-        
-        getData(url: jsonURL!)
-        
-        issuesArray = loadIssues()
-    }
-    
-    func getData(url: URL) {
+    func getData() {
         provider.request(.getIssues(username: variable.login, repos: repository.name!)) { result in
             switch result {
             case let .success(moyaResponse):

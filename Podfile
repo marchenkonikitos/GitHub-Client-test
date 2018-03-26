@@ -8,5 +8,6 @@ target 'GitHub test' do
   pod 'Moya'
   pod 'ObjectMapper'
   pod 'Moya-ObjectMapper'
+  pod 'KeychainSwift'
 
 end

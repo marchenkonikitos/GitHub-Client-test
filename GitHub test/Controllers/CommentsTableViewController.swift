@@ -14,7 +14,7 @@ class CommentsTableViewController: UITableViewController {
     var issue = Issues()
     var repository = Repository()
     var commentsArray: [Comments] = []
-    let provider = MoyaProvider<CommentServices>()
+    let provider = MoyaProvider<CommentTarget>()
     let variable = Variables()
 
     override func viewDidLoad() {
@@ -23,19 +23,10 @@ class CommentsTableViewController: UITableViewController {
         let title = issue.title
         self.title = title
         
-        loadCommentsArray()
+        getData()
     }
     
-    func loadCommentsArray() {
-        let jsonURLString = (issue.url)! + "/comments"
-        let jsonURL = URL(string: jsonURLString)
-        
-        getData(url: jsonURL!)
-        
-        commentsArray = loadComments()
-    }
-    
-    func getData(url: URL) {
+    func getData() {
         provider.request(.getComments(username: variable.login, repository: repository.name!, number: Int(issue.number))) { result in
             switch result {
             case let .success(moyaResponse):

@@ -16,7 +16,7 @@ class ReposTableViewController: UITableViewController {
     @IBOutlet var numberOfRepos: UILabel!
     
     var repositoriesArray: [Repository] = []
-    let provider = MoyaProvider<RepositoriesServices>()
+    let provider = MoyaProvider<RepositoriesTarget>()
     let variable = Variables()
 
     override func viewDidLoad() {
@@ -70,8 +70,7 @@ class ReposTableViewController: UITableViewController {
             switch result {
             case let .success(moyaResponse):
                 let data = moyaResponse.data
-                let dataSTR = String(data: data, encoding: .utf8)
-                print(dataSTR)
+
                 do {
                     let repositoriesData = try JSONDecoder().decode([ReposData].self, from: data)
                     self.refreshControl?.endRefreshing()
@@ -82,7 +81,7 @@ class ReposTableViewController: UITableViewController {
                 } catch {
                     print("error")
                 }
-                
+
             case let .failure(error):
                 print(error)
             }
