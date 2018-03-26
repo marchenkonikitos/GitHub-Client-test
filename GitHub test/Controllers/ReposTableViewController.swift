@@ -15,9 +15,10 @@ class ReposTableViewController: UITableViewController {
     @IBOutlet var userImage: UIImageView!
     @IBOutlet var numberOfRepos: UILabel!
     
-    var repositoriesArray: [Repository] = []
-    let provider = MoyaProvider<RepositoriesTarget>()
-    let variable = Variables()
+    private var repositoriesArray: [Repository] = []
+    private let variable = Variables()
+    private let repositoriesService = RepositoryServices()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,43 +67,10 @@ class ReposTableViewController: UITableViewController {
     
     //MARK: -Get and save repositories and issues data
     func getData() {
-        provider.request(.getRepositories(username: variable.login)) { result in
-            switch result {
-            case let .success(moyaResponse):
-                let data = moyaResponse.data
-
-                do {
-                    let repositoriesData = try JSONDecoder().decode([ReposData].self, from: data)
-                    self.refreshControl?.endRefreshing()
-                    DispatchQueue.main.async {
-                        self.saveRepositories(repos: repositoriesData)
-                        self.tableView.reloadData()
-                    }
-                } catch {
-                    print("error")
-                }
-
-            case let .failure(error):
-                print(error)
-            }
+        repositoriesService.getRepositories {
+            self.repositoriesArray = self.repositoriesService.loadRepos()
+            self.tableView.reloadData()
         }
-    }
-    
-    func saveRepositories(repos: [ReposData]) {
-        clearRepositories()
-        
-        for repository in repos {
-            let id = repository.id
-            let name = repository.name
-            let url = repository.url
-            let hasIssues = repository.hasIssues
-            let htmlUrl = repository.htmlUrl
-            let openIssuesCount = repository.openIssuesCount
-            
-            guard saveRepository(id: id, name: name, url: url, htmlUrl: htmlUrl, hasIssues: hasIssues, openIssuesCount: openIssuesCount) != nil else { return }
-        }
-        
-        repositoriesArray = loadRepositories()
     }
     
     
@@ -114,8 +82,7 @@ class ReposTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        let data = loadRepositories()
-        return (data.count)
+        return repositoriesArray.count
     }
 
 

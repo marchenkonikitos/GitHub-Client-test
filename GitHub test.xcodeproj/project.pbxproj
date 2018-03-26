@@ -31,6 +31,8 @@
 		1A966A9F204F1A41003AEA9E /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A966A9E204F1A41003AEA9E /* IssueTableViewCell.swift */; };
 		1ACEAD302068C7AD00AEE525 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEAD2F2068C7AD00AEE525 /* Variables.swift */; };
 		1AD261BB2068F9B8006C4F57 /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261BA2068F9B8006C4F57 /* UserStorage.swift */; };
+		1AD261BD20691C97006C4F57 /* RepositoriesServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261BC20691C97006C4F57 /* RepositoriesServices.swift */; };
+		1AD261BF20691EA3006C4F57 /* RepositoriesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261BE20691EA3006C4F57 /* RepositoriesStorage.swift */; };
 		5D0572CB7178EBCE5FF962BA /* Pods_GitHub_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA29D623ACA89062E6B097DF /* Pods_GitHub_test.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +64,8 @@
 		1AA2D08220625F7800C5A05C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Files/SWIFT/Elements/GitHub-Client-test/GitHub test/View/Assets.xcassets"; sourceTree = "<absolute>"; };
 		1ACEAD2F2068C7AD00AEE525 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
 		1AD261BA2068F9B8006C4F57 /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
+		1AD261BC20691C97006C4F57 /* RepositoriesServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesServices.swift; sourceTree = "<group>"; };
+		1AD261BE20691EA3006C4F57 /* RepositoriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesStorage.swift; sourceTree = "<group>"; };
 		57E527C0CE54960E2DA1CAB9 /* Pods-GitHub test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHub test.release.xcconfig"; path = "Pods/Target Support Files/Pods-GitHub test/Pods-GitHub test.release.xcconfig"; sourceTree = "<group>"; };
 		7D46DE56CE9744413EAA9208 /* Pods-GitHub test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHub test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GitHub test/Pods-GitHub test.debug.xcconfig"; sourceTree = "<group>"; };
 		EA29D623ACA89062E6B097DF /* Pods_GitHub_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHub_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				1A370D942068ED6400A13348 /* UserServices.swift */,
+				1AD261BC20691C97006C4F57 /* RepositoriesServices.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				1AD261BA2068F9B8006C4F57 /* UserStorage.swift */,
+				1AD261BE20691EA3006C4F57 /* RepositoriesStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -366,8 +372,10 @@
 				1A370D8B2068E06B00A13348 /* RepositoriesAPI.swift in Sources */,
 				1A16B7022050231D00653DBB /* CommentData.swift in Sources */,
 				1A2BFD65204875ED00B19177 /* ReposTableViewController.swift in Sources */,
+				1AD261BF20691EA3006C4F57 /* RepositoriesStorage.swift in Sources */,
 				1A56EC2A204976B400421B9B /* ReposData.swift in Sources */,
 				1A16B6FE2050131E00653DBB /* CommentsTableViewController.swift in Sources */,
+				1AD261BD20691C97006C4F57 /* RepositoriesServices.swift in Sources */,
 				1A16B7002050132C00653DBB /* CommentsTableViewCell.swift in Sources */,
 				1A370D8D2068E07900A13348 /* IssuesAPI.swift in Sources */,
 			);

@@ -16,7 +16,6 @@ class LogInController: UIViewController {
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var signButton: UIButton!
     
-    let provider = MoyaProvider<UserTarget>()
     let userService = UserServices()
     
     override func viewDidLoad() {
@@ -40,9 +39,7 @@ class LogInController: UIViewController {
             shakeButton()
             return
         }
-        
         doLogin(usr: username!, psw: password!)
-        
     }
     
     func doLogin(usr: String, psw: String) {
@@ -53,7 +50,6 @@ class LogInController: UIViewController {
         }, failed: {
             self.wrongData()
         })
-
     }
     
     func shakeButton() {

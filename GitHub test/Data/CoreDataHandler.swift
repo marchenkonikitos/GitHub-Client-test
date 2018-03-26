@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 //Get context
-private func getContext() -> NSManagedObjectContext {
+func getContext() -> NSManagedObjectContext {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     return appDelegate.persistentContainer.viewContext
@@ -18,23 +18,12 @@ private func getContext() -> NSManagedObjectContext {
 
 //MARK: -Repositories
 //Save repositories
-func saveRepository(id: Int32,name: String, url: String, htmlUrl: String, hasIssues: Bool, openIssuesCount: Int32) -> Repository? {
-    let context = getContext()
-    let repos = NSEntityDescription.insertNewObject(forEntityName: "Repository", into: context) as! Repository
+func saveRepository(context: NSManagedObjectContext) {
     
-    repos.id = id
-    repos.name = name
-    repos.hasIssues = hasIssues
-    repos.htmlUrl = htmlUrl
-    repos.url = url
-    repos.openIssuesCount = openIssuesCount
-
     do {
         try context.save()
-        return repos
     } catch {
-        print("\nError repository car")
-        return nil
+        print("\nError save repository")
     }
 }
 

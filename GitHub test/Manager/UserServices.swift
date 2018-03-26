@@ -8,7 +8,6 @@
 
 import Foundation
 import Moya
-import KeychainSwift
 
 class UserServices {
     
@@ -19,7 +18,6 @@ class UserServices {
         provider.request(.getUser(hash: hash)) { response in
             
             if let value = response.value, value.statusCode == 200 {
-                
                 let data = value.data
                 
                 do {
