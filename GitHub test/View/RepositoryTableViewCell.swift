@@ -15,6 +15,6 @@ class RepositoryTableViewCell: UITableViewCell {
     
     func initCell(repository: Repository) {
         repositoryName.text = repository.name
-        issuesCount.text = String(repository.open_issues_count) + " issues"
+        issuesCount.text = String(repository.openIssuesCount) + " issues"
     }
 }

@@ -7,27 +7,26 @@
 //
 
 import UIKit
-import Alamofire
-import Locksmith
 
 class LogInController: UIViewController {
     
     @IBOutlet var loginTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var signButton: UIButton!
-
+    
+    let userService = UserServices()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        signButton.layer.cornerRadius = 10
 
-        if let accountData = try Locksmith.loadDataForUserAccount(userAccount: "Account") {
-            let username = accountData["username"] as! String
-            let password = accountData["password"] as! String
-            loginTextField.text = username
-            passwordTextField.text = password
-            
-            doLogin(usr: username, psw: password, isEdit: false)
+        signButton.layer.cornerRadius = 10
+        
+        if userService.isAuth {
+            userService.getUser(success: {
+                self.loginComplete()
+            }) {
+                self.wrongData()
+            }
         }
     }
 
@@ -40,39 +39,18 @@ class LogInController: UIViewController {
             shakeButton()
             return
         }
-        
-        doLogin(usr: username!, psw: password!, isEdit: true)
-        
+        doLogin(usr: username!, psw: password!)
     }
     
-    func doLogin(usr: String, psw: String, isEdit: Bool) {
+    func doLogin(usr: String, psw: String) {
         signButton.isEnabled = false
         
-        let url = URL(string: "https://api.github.com/user")
-        
-        let credentialData = "\(usr):\(psw)".data(using: String.Encoding.utf8)!
-        let base64Credentials = credentialData.base64EncodedString(options: [])
-        let headers = ["Authorization": "Basic \(base64Credentials)"]
-        
-        Alamofire.request(url!, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers)
-        .validate()
-            .responseJSON { responce in
-                if responce.result.value != nil {
-                    let data = responce.data
-                    do {
-                        let userData = try JSONDecoder().decode(UserData.self, from: data!)
-                        self.saveData(userData: userData)
-                        self.loginComplete(username: usr, password: psw, isEdit: isEdit)
-                        
-                    } catch {
-                        self.shakeButton()
-                        self.wrongData()
-                    }
-                } else {
-                    self.shakeButton()
-                    self.wrongData()
-                }
-        }
+        userService.login(username: usr, password: psw, success: {
+            self.loginComplete()
+        }, failed: {
+            self.wrongData()
+            self.signButton.isEnabled = true
+        })
     }
     
     func shakeButton() {
@@ -105,19 +83,7 @@ class LogInController: UIViewController {
         }
     }
     
-    func loginComplete(username: String, password: String, isEdit: Bool) {
-        
-        if isEdit {
-            do {
-                try Locksmith.saveData(data: ["username" : username, "password" : password], forUserAccount: "Account")
-            } catch {
-                do {
-                    try Locksmith.updateData(data: ["username" : username, "password" : password], forUserAccount: "Account")
-                } catch {
-                    print("Unable to save data")
-                }
-            }
-        }
+    func loginComplete() {
         
         UIView.animate(withDuration: 0.3, animations: {
             self.signButton.backgroundColor = .green
@@ -126,17 +92,4 @@ class LogInController: UIViewController {
                 self.performSegue(withIdentifier: "GoToReposTable", sender: self)
         }
     }
-    
-    func saveData (userData: UserData) {
-        UserDefaults.standard.set(userData.id, forKey: "userId")
-        UserDefaults.standard.set(userData.avatar_url, forKey: "avatar_url")
-        UserDefaults.standard.set(userData.login, forKey: "login")
-        UserDefaults.standard.set(userData.gists_url, forKey: "userUrl")
-        UserDefaults.standard.set(userData.gists_url, forKey: "gists_url")
-        UserDefaults.standard.set(userData.repos_url, forKey: "repos_url")
-        UserDefaults.standard.set(userData.name, forKey: "userName")
-        UserDefaults.standard.set(userData.public_repos, forKey: "numberOfRepos")
-    }
-
 }
-

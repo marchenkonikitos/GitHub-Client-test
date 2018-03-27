@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Files/SWIFT/Elements/GitHub-Client-test/GitHub test/View/Assets.xcassets">
+   </FileRef>
+   <FileRef
       location = "group:Comments.swift">
    </FileRef>
    <FileRef

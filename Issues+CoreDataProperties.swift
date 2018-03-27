@@ -17,12 +17,13 @@ extension Issues {
     }
 
     @NSManaged public var comments: Int32
-    @NSManaged public var comments_url: String?
+    @NSManaged public var commentsUrl: String?
     @NSManaged public var state: String?
     @NSManaged public var title: String?
     @NSManaged public var repository: Repository?
     @NSManaged public var comment: Comments?
     @NSManaged public var url: String?
+    @NSManaged public var number: Int32?
 
 }
 

@@ -5,5 +5,9 @@ target 'GitHub test' do
 
   pod 'Alamofire'
   pod 'Locksmith'
+  pod 'Moya'
+  pod 'ObjectMapper'
+  pod 'Moya-ObjectMapper'
+  pod 'KeychainSwift'
 
 end

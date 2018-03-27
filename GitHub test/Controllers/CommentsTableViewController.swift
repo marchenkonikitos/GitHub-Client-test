@@ -11,7 +11,10 @@ import UIKit
 class CommentsTableViewController: UITableViewController {
     
     var issue = Issues()
+    var repository = Repository()
     var commentsArray: [Comments] = []
+    let variable = Variables()
+    let commentService = CommentsServices()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,50 +22,21 @@ class CommentsTableViewController: UITableViewController {
         let title = issue.title
         self.title = title
         
-        loadCommentsArray()
+        getData()
     }
     
-    func loadCommentsArray() {
-        let jsonURLString = (issue.url)! + "/comments"
-        let jsonURL = URL(string: jsonURLString)
-        
-        getData(url: jsonURL!)
-        
-        commentsArray = loadComments()
-    }
-    
-    func getData(url: URL) {
-        URLSession.shared.dataTask(with: url) { (data, response, err) in
-            guard let data = data else { return }
-            guard err == nil else { return }
+    func getData() {
+        commentService.getComments(repository: repository, issue: issue, success: {
+            self.commentsArray = self.commentService.loadIssues()
+            self.tableView.reloadData()
+        }) { error in
+            let alert = UIAlertController(title: "Problem", message: error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
             
-            do {
-                let commentsData = try JSONDecoder().decode([CommentData].self, from: data)
-                self.saveComments(comments: commentsData)
-            } catch {
-                print("error")
-            }
-        }.resume()
-    }
-    
-    func saveComments(comments: [CommentData]) {
-        clearComments()
-        
-        for comment in comments {
-            let body = comment.body
-            let html_url = comment.html_url
-            
-            guard saveComment(body: body, html_url: html_url, issue: issue) else { return }
+            self.present(alert, animated: true, completion: nil)
         }
-        
-        commentsFilter()
     }
     
-    func commentsFilter() {
-        commentsArray = loadComments()
-        
-        commentsArray.filter { $0.issues == issue }
-    }
 
     // MARK: - Table view data source
 
@@ -73,8 +47,7 @@ class CommentsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        let count = issue.comments
-        return Int(count)
+        return commentsArray.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

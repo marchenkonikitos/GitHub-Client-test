@@ -16,13 +16,13 @@ extension Repository {
         return NSFetchRequest<Repository>(entityName: "Repository")
     }
 
-    @NSManaged public var has_issues: Bool
-    @NSManaged public var html_url: String?
+    @NSManaged public var hasIssues: Bool
+    @NSManaged public var htmlUrl: String?
     @NSManaged public var id: Int32
-    @NSManaged public var issues_url: String?
+    @NSManaged public var issuesUrl: String?
     @NSManaged public var name: String?
     @NSManaged public var url: String?
-    @NSManaged public var open_issues_count: Int32
+    @NSManaged public var openIssuesCount: Int32
     @NSManaged public var issues: Issues?
 
 }

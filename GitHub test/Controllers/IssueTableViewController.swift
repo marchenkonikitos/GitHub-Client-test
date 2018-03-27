@@ -12,14 +12,14 @@ class IssueTableViewController: UITableViewController {
     
     var repository = Repository()
     var issuesArray: [Issues] = []
+    let variable = Variables()
+    let issueService = IssuesService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let title = repository.name
         self.title = title
-        
-        loadIssueArray()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,67 +30,20 @@ class IssueTableViewController: UITableViewController {
         addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         let barButton = UIBarButtonItem(customView: addButton)
         self.navigationItem.rightBarButtonItem = barButton
+        
+        getData()
     }
     
-    func loadIssueArray() {
-        let jsonURLString = (repository.url)! + "/issues"
-        let jsonURL = URL(string: jsonURLString)
-        
-        getData(url: jsonURL!)
-        
-        issuesArray = loadIssues()
-    }
-    
-    func getData(url: URL) {
-        URLSession.shared.dataTask(with: url) { (data, response, err) in
-            guard let data = data else { return }
-            guard err == nil else { return }
+    func getData() {
+        issueService.getIssues(repository: repository, success: {
+            self.issuesArray = self.issueService.loadIssues()
+            self.tableView.reloadData()
+        }, failed: { error in
+            let alert = UIAlertController(title: "Problem", message: error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
             
-            do {
-                let issuesData = try JSONDecoder().decode([IssueData].self, from: data)
-                self.refreshControl?.endRefreshing()
-                DispatchQueue.main.async {
-                    self.saveIssues(issues: issuesData)
-                    self.tableView.reloadData()
-                }
-            } catch {
-                print("error")
-            }
-        }.resume()
-    }
-    
-    func saveIssues(issues: [IssueData]) {
-        clearIssues()
-        
-        for issue in issues {
-            let title = issue.title
-            let comments_url = issue.comments_url
-            let comments = issue.comments
-            let state = issue.state
-            let url = issue.url
-            
-            guard saveIssue(comments_url: comments_url, title: title, comments: comments, state: state, url: url, repository: repository) else { return }
-        }
-        issuesFilter()
-    }
-    
-    func issuesFilter() {
-        issuesArray = loadIssues()
-        
-        issuesArray.filter{ $0.repository == repository }
-        
-        /*
-        issuesArray.forEach { (issue) in
-            if issue.url != (repository.url! + "/issues") {
-                
-                guard let index = issuesArray.index(of: issue) else {
-                    return
-                }
-                
-                issuesArray.remove(at: index)
-            }
-        }
-         */
+            self.present(alert, animated: true, completion: nil)
+            })
     }
     
     @objc
@@ -107,8 +60,7 @@ class IssueTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        let count = repository.open_issues_count
-        return Int(UInt(count))
+        return issuesArray.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -134,6 +86,7 @@ class IssueTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToComments" {
             (segue.destination as! CommentsTableViewController).issue = selectedIssue!
+            (segue.destination as! CommentsTableViewController).repository = repository
         }
     }
 

@@ -20,9 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         //-----Delete repositories and issues data
-        clearRepositories()
-        clearIssues()
-        clearComments()
+        //clearRepositories()
+        //clearIssues()
+        //clearComments()
         return true
     }
 

@@ -7,14 +7,17 @@
 //
 
 import UIKit
-import Alamofire
 
 class ReposTableViewController: UITableViewController {
     
     @IBOutlet var userImage: UIImageView!
     @IBOutlet var numberOfRepos: UILabel!
     
-    var repositoriesArray: [Repository] = []
+    private var repositoriesArray: [Repository] = []
+    private let variable = Variables()
+    private let repositoriesService = RepositoryServices()
+    private let userServices = UserServices()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +39,9 @@ class ReposTableViewController: UITableViewController {
         self.userImage.layer.masksToBounds = true
         self.userImage.layer.cornerRadius = self.userImage.frame.width / 2
         
-        let imageURL = URL(string: UserDefaults.standard.value(forKey: "avatar_url") as! String)
-        let imageData = NSData(contentsOf: imageURL!)
+        let imageData = userServices.getAvatar()
         
-        self.userImage.image = UIImage(data: imageData! as Data)
+        self.userImage.image = UIImage(data: imageData as Data)
         
         let tapGesture = UILongPressGestureRecognizer(target: self, action: #selector(imageTapped))
         tapGesture.minimumPressDuration = 0.0
@@ -63,41 +65,14 @@ class ReposTableViewController: UITableViewController {
     
     //MARK: -Get and save repositories and issues data
     func getData() {
-        let jsonURLString = UserDefaults.standard.value(forKey: "repos_url") as! String
-        guard let jsonURL = URL(string: jsonURLString) else { return }
-        
-        URLSession.shared.dataTask(with: jsonURL) { (data, response, err) in
-            guard let data = data else { return }
-            guard err == nil else { return }
-            
-            do {
-                let reposData = try JSONDecoder().decode([ReposData].self, from: data)
-                self.refreshControl?.endRefreshing()
-                DispatchQueue.main.async {
-                    self.saveRepositories(repos: reposData)
-                    self.tableView.reloadData()
-                }
-            } catch {
-                print("error")
-            }
-        }.resume()
-    }
-    
-    func saveRepositories(repos: [ReposData]) {
-        clearRepositories()
-        
-        for repository in repos {
-            let id = repository.id
-            let name = repository.name
-            let url = repository.url
-            let has_issues = repository.has_issues
-            let html_url = repository.html_url
-            let open_issues_count = repository.open_issues_count
-            
-            guard saveRepository(id: id, name: name, url: url, html_url: html_url, has_issue: has_issues, open_issues_count: open_issues_count) != nil else { return }
-        }
-        
-        repositoriesArray = loadRepositories()
+        repositoriesService.getRepositories(success: {
+            self.repositoriesArray = self.repositoriesService.loadRepos()
+            self.tableView.reloadData()
+        }, failed: { error in
+            let alert = UIAlertController(title: "Problem", message: error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        })
     }
     
     
@@ -109,8 +84,7 @@ class ReposTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        let data = loadRepositories()
-        return (data.count)
+        return repositoriesArray.count
     }
 
 

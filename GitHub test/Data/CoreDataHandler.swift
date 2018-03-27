@@ -10,34 +10,22 @@ import UIKit
 import CoreData
 
 //Get context
-private func getContext() -> NSManagedObjectContext {
+func getContext() -> NSManagedObjectContext {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     return appDelegate.persistentContainer.viewContext
 }
 
-//MARK: -Repositories
-//Save repositories
-func saveRepository(id: Int32,name: String, url: String, html_url: String, has_issue: Bool, open_issues_count: Int32) -> Repository? {
-    let context = getContext()
-    let repos = NSEntityDescription.insertNewObject(forEntityName: "Repository", into: context) as! Repository
-    
-    repos.id = id
-    repos.name = name
-    repos.has_issues = has_issue
-    repos.html_url = html_url
-    repos.url = url
-    repos.open_issues_count = open_issues_count
-
+//Save data
+func saveData(context: NSManagedObjectContext) {
     do {
         try context.save()
-        return repos
     } catch {
-        print("\nError repository car")
-        return nil
+        print("Problem with save to CoreData")
     }
 }
 
+//MARK: -Repositories
 func loadRepositories() -> [Repository] {
     let context = getContext()
     var repositories: [Repository] = []
@@ -64,26 +52,6 @@ func clearRepositories() -> Bool {
 }
 
 //MARK: -Issues
-func saveIssue(comments_url: String, title: String, comments: Int32, state: String, url: String, repository: Repository) -> Bool{
-    let context = getContext()
-    let issue = NSEntityDescription.insertNewObject(forEntityName: "Issues", into: context) as! Issues
-    
-    issue.title = title
-    issue.comments_url = comments_url
-    issue.comments = comments
-    issue.state = state
-    issue.repository = repository
-    issue.url = url
-    
-    do {
-        try context.save()
-        return true
-    } catch {
-        print("\nError save issue")
-        return false
-    }
-}
-
 func loadIssues() -> [Issues] {
     let context = getContext()
     var issues: [Issues] = []
@@ -109,24 +77,7 @@ func clearIssues() -> Bool {
     }
 }
 
-//MARK: -Issues
-func saveComment(body: String, html_url: String, issue: Issues) -> Bool {
-    let context = getContext()
-    let comment = NSEntityDescription.insertNewObject(forEntityName: "Comments", into: context) as! Comments
-    
-    comment.body = body
-    comment.html_url = html_url
-    comment.issues = issue
-    
-    do {
-        try context.save()
-        return true
-    } catch {
-        print("\nError save comment")
-        return false
-    }
-}
-
+//MARK: -Comments
 func loadComments() -> [Comments] {
     let context = getContext()
     var comments: [Comments] = []

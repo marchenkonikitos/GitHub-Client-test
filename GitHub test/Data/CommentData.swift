@@ -10,5 +10,10 @@ import Foundation
 
 struct CommentData: Decodable {
     let body: String
-    let html_url: String
+    let htmlUrl: String
+    
+    enum CodingKeys: String, CodingKey {
+        case body
+        case htmlUrl = "html_url"
+    }
 }
