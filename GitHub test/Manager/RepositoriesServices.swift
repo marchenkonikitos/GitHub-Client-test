@@ -29,10 +29,18 @@ class RepositoryServices {
                         success()
                     }
                 } catch {
-                    failed((response.error?.localizedDescription)!)
+                    if let err = response.error?.localizedDescription {
+                        failed(err)
+                    } else {
+                        failed("So big problem")
+                    }
                 }
             } else {
-                failed((response.error?.localizedDescription)!)
+                if let err = response.error?.localizedDescription {
+                    failed(err)
+                } else {
+                    failed("So big problem")
+                }
             }
         }
     }

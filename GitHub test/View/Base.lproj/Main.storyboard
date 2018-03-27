@@ -335,7 +335,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Body" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="THf-mT-Qz4">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Body" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="THf-mT-Qz4">
                                 <rect key="frame" x="16" y="164" width="288" height="288"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="THf-mT-Qz4" secondAttribute="height" multiplier="1:1" id="Nsi-zR-mGr"/>

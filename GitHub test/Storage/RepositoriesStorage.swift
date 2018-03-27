@@ -27,7 +27,7 @@ class RepositoriesStorage {
     }
     
     func clear() {
-        guard clearRepositories() else { return }
+        guard clearRepositories() else { return}
     }
     
     func load() -> [Repository]{
