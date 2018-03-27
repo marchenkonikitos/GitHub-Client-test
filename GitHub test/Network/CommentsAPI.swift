@@ -14,9 +14,6 @@ enum CommentTarget {
 }
 
 extension CommentTarget: TargetType {
-    var baseURL: URL {
-        return URL(string: "https://api.github.com")!
-    }
     
     var path: String {
         switch self {
@@ -35,7 +32,7 @@ extension CommentTarget: TargetType {
     
     var task: Task {
         switch self{
-        case .getComments(_, _, _):
+        case .getComments:
             return .requestPlain
         }
     }
@@ -43,6 +40,4 @@ extension CommentTarget: TargetType {
     var headers: [String : String]? {
         return ["Content-type": "application/json"]
     }
-    
-    
 }

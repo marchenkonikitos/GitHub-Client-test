@@ -14,9 +14,6 @@ enum IssuesTarget {
 }
 
 extension IssuesTarget: TargetType {
-    var baseURL: URL {
-        return URL(string: "https://api.github.com")!
-    }
     
     var path: String {
         switch self {
@@ -31,7 +28,7 @@ extension IssuesTarget: TargetType {
     
     var task: Task {
         switch self{
-        case .getIssues(_, _):
+        case .getIssues:
             return .requestPlain
         }
     }

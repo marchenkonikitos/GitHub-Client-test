@@ -14,13 +14,10 @@ enum UserTarget {
 }
 
 extension UserTarget: TargetType {
-    var baseURL: URL {
-        return URL(string: "https://api.github.com")!
-    }
     
     var path: String {
         switch self {
-        case .getUser(_):
+        case .getUser:
             return "/user"
         }
     }
@@ -35,7 +32,7 @@ extension UserTarget: TargetType {
     
     var task: Task {
         switch self{
-        case .getUser(_):
+        case .getUser:
             return .requestPlain
         }
     }

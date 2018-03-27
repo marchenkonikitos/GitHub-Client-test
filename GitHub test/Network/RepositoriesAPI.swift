@@ -14,9 +14,6 @@ enum RepositoriesTarget {
 }
 
 extension RepositoriesTarget: TargetType {
-    var baseURL: URL {
-        return URL(string: "https://api.github.com")!
-    }
     
     var path: String {
         switch self {
@@ -35,7 +32,7 @@ extension RepositoriesTarget: TargetType {
     
     var task: Task {
         switch self{
-        case .getRepositories(_):
+        case .getRepositories:
             return .requestPlain
         }
     }
