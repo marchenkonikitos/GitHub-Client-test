@@ -21,6 +21,7 @@ func saveData(context: NSManagedObjectContext) {
     do {
         try context.save()
     } catch {
+        debugPrint(error.localizedDescription)
         print("Problem with save to CoreData")
     }
 }
@@ -67,12 +68,14 @@ func loadIssues() -> [Issues] {
 
 func clearIssues() -> Bool {
     let context = getContext()
+    
     let delete = NSBatchDeleteRequest(fetchRequest: Issues.fetchRequest())
     
     do {
         try context.execute(delete)
         return true
     } catch {
+        debugPrint(error.localizedDescription)
         return false
     }
 }

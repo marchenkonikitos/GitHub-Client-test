@@ -13,10 +13,10 @@ class IssuesStorage {
     func save(issues: [IssueData], repository: Repository) {
         issues.forEach { (issue) in
             let context = getContext()
-            let issueObj = NSEntityDescription.insertNewObject(forEntityName: "Issues", into: context) as! Issues
+            let issueObj = Issues(entity: Issues.entity(), insertInto: context)
+//            let issueObj = NSEntityDescription.insertNewObject(forEntityName: "Issues", into: context) as! Issues
             
             issueObj.title = issue.title
-            issueObj.commentsUrl = issue.commentsUrl
             issueObj.comments = issue.comments
             issueObj.state = issue.state
             issueObj.url = issue.url

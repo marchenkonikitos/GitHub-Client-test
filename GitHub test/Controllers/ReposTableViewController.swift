@@ -111,6 +111,6 @@ class ReposTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        (segue.destination as! IssueTableViewController).repository = selectedRepository!
+        (segue.destination as? IssueTableViewController)?.repository = selectedRepository!
     }
 }

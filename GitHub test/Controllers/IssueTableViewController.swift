@@ -10,7 +10,7 @@ import UIKit
 
 class IssueTableViewController: UITableViewController {
     
-    var repository = Repository()
+    var repository: Repository!
     var issuesArray: [Issues] = []
     let variable = Variables()
     let issueService = IssuesService()
@@ -74,7 +74,7 @@ class IssueTableViewController: UITableViewController {
         return cell
     }
     
-    var selectedIssue: Issues?
+    var selectedIssue: Issues!
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -84,8 +84,8 @@ class IssueTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        (segue.destination as! CommentsTableViewController).issue = selectedIssue!
-        (segue.destination as! CommentsTableViewController).repository = repository
+        (segue.destination as? CommentsTableViewController)?.issue = selectedIssue
+        (segue.destination as? CommentsTableViewController)?.repository = repository
     }
 
 }

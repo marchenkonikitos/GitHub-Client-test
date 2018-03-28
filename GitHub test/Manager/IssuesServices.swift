@@ -18,11 +18,10 @@ class IssuesService {
         provider.request(.getIssues(username: variable.login, repos: repository.name!)) { response in
             if let value = response.value, value.statusCode == 200 {
                 let data = value.data
-                self.issues.clear()
-                
                 do {
                     let issuesData = try JSONDecoder().decode([IssueData].self, from: data)
                     DispatchQueue.main.async {
+                        self.issues.clear()
                         self.issues.save(issues: issuesData, repository: repository)
                         
                         success()

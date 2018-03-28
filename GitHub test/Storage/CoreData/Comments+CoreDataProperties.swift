@@ -1,8 +1,9 @@
 //
 //  Comments+CoreDataProperties.swift
-//  
+//  GitHub test
 //
-//  Created by Nikita Marchenko on 07.03.2018.
+//  Created by Nikita Marchenko on 28.03.2018.
+//  Copyright © 2018 Nikita Marchenko. All rights reserved.
 //
 //
 
@@ -18,5 +19,6 @@ extension Comments {
 
     @NSManaged public var body: String?
     @NSManaged public var htmlUrl: String?
-    @NSManaged public var issues: Issue?
+    @NSManaged public var issues: Issues?
+
 }
