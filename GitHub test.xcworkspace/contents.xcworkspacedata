@@ -5,24 +5,6 @@
       location = "group:/Files/SWIFT/Elements/GitHub-Client-test/GitHub test/View/Assets.xcassets">
    </FileRef>
    <FileRef
-      location = "group:Comments.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Issues.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Repository.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Comments+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Issues+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Repository+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
       location = "group:GitHub test.xcodeproj">
    </FileRef>
    <FileRef

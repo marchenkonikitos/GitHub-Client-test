@@ -9,16 +9,12 @@
 import Foundation
 import Moya
 
-extension URL {
-    public var baseURL: URL {
-        get {
-            return URL(string: "https://api.github.com")!
-        }
-    }
-}
-
 extension TargetType {
     var baseURL: URL {
         return URL(string: "https://api.github.com")!
     }
+}
+
+extension NSManagedObjectContext {
+    static let context = CodingUserInfoKey(rawValue: "context")
 }

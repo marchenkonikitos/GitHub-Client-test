@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D102" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Comments" representedClassName="Comments" syncable="YES" codeGenerationType="class">
+    <entity name="Comments" representedClassName="Comments" syncable="YES">
         <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="htmlUrl" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="issues" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Issues" inverseName="comment" inverseEntity="Issues" syncable="YES"/>
     </entity>
-    <entity name="Issues" representedClassName="Issues" syncable="YES" codeGenerationType="class">
+    <entity name="Issues" representedClassName="Issues" syncable="YES">
         <attribute name="comments" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="commentsUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -15,11 +14,10 @@
         <relationship name="comment" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comments" inverseName="issues" inverseEntity="Comments" syncable="YES"/>
         <relationship name="repository" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Repository" inverseName="issues" inverseEntity="Repository" syncable="YES"/>
     </entity>
-    <entity name="Repository" representedClassName="Repository" syncable="YES" codeGenerationType="class">
+    <entity name="Repository" representedClassName="Repository" syncable="YES">
         <attribute name="hasIssues" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="htmlUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="issuesUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="openIssuesCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
@@ -27,7 +25,7 @@
     </entity>
     <elements>
         <element name="Comments" positionX="-45" positionY="63" width="128" height="90"/>
-        <element name="Issues" positionX="-54" positionY="27" width="128" height="165"/>
-        <element name="Repository" positionX="-54" positionY="-9" width="128" height="165"/>
+        <element name="Issues" positionX="-54" positionY="27" width="128" height="150"/>
+        <element name="Repository" positionX="-54" positionY="-9" width="128" height="150"/>
     </elements>
 </model>

@@ -1,8 +1,9 @@
 //
 //  Repository+CoreDataProperties.swift
-//  
+//  GitHub test
 //
-//  Created by Nikita Marchenko on 04.03.2018.
+//  Created by Nikita Marchenko on 28.03.2018.
+//  Copyright © 2018 Nikita Marchenko. All rights reserved.
 //
 //
 
@@ -19,11 +20,10 @@ extension Repository {
     @NSManaged public var hasIssues: Bool
     @NSManaged public var htmlUrl: String?
     @NSManaged public var id: Int32
-    @NSManaged public var issuesUrl: String?
     @NSManaged public var name: String?
-    @NSManaged public var url: String?
     @NSManaged public var openIssuesCount: Int32
-    @NSManaged public var issues: Issues?
+    @NSManaged public var url: String?
+    @NSManaged public var issues: NSSet?
 
 }
 

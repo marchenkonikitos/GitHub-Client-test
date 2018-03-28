@@ -1,8 +1,9 @@
 //
 //  Issues+CoreDataProperties.swift
-//  
+//  GitHub test
 //
-//  Created by Nikita Marchenko on 07.03.2018.
+//  Created by Nikita Marchenko on 28.03.2018.
+//  Copyright © 2018 Nikita Marchenko. All rights reserved.
 //
 //
 
@@ -17,13 +18,12 @@ extension Issues {
     }
 
     @NSManaged public var comments: Int32
-    @NSManaged public var commentsUrl: String?
+    @NSManaged public var number: Int32
     @NSManaged public var state: String?
     @NSManaged public var title: String?
-    @NSManaged public var repository: Repository?
-    @NSManaged public var comment: Comments?
     @NSManaged public var url: String?
-    @NSManaged public var number: Int32?
+    @NSManaged public var comment: NSSet?
+    @NSManaged public var repository: Repository?
 
 }
 

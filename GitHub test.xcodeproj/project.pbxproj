@@ -27,6 +27,12 @@
 		1A56EC2A204976B400421B9B /* ReposData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A56EC29204976B400421B9B /* ReposData.swift */; };
 		1A5A26CA204C2C26008E1F2A /* IssueData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5A26C9204C2C26008E1F2A /* IssueData.swift */; };
 		1A6D7E93204B29B700416370 /* RepositoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6D7E92204B29B700416370 /* RepositoryTableViewCell.swift */; };
+		1A788D9C206B86CF006BC7D2 /* Comments+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A788D96206B86CF006BC7D2 /* Comments+CoreDataClass.swift */; };
+		1A788D9D206B86CF006BC7D2 /* Comments+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A788D97206B86CF006BC7D2 /* Comments+CoreDataProperties.swift */; };
+		1A788D9E206B86CF006BC7D2 /* Issues+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A788D98206B86CF006BC7D2 /* Issues+CoreDataClass.swift */; };
+		1A788D9F206B86CF006BC7D2 /* Issues+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A788D99206B86CF006BC7D2 /* Issues+CoreDataProperties.swift */; };
+		1A788DA0206B86CF006BC7D2 /* Repository+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A788D9A206B86CF006BC7D2 /* Repository+CoreDataClass.swift */; };
+		1A788DA1206B86CF006BC7D2 /* Repository+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A788D9B206B86CF006BC7D2 /* Repository+CoreDataProperties.swift */; };
 		1A966A9D204F10DA003AEA9E /* IssueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A966A9C204F10DA003AEA9E /* IssueTableViewController.swift */; };
 		1A966A9F204F1A41003AEA9E /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A966A9E204F1A41003AEA9E /* IssueTableViewCell.swift */; };
 		1ACEAD302068C7AD00AEE525 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEAD2F2068C7AD00AEE525 /* Variables.swift */; };
@@ -64,6 +70,12 @@
 		1A56EC2B2049782700421B9B /* GitHub test.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "GitHub test.entitlements"; sourceTree = "<group>"; };
 		1A5A26C9204C2C26008E1F2A /* IssueData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueData.swift; sourceTree = "<group>"; };
 		1A6D7E92204B29B700416370 /* RepositoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTableViewCell.swift; sourceTree = "<group>"; };
+		1A788D96206B86CF006BC7D2 /* Comments+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Comments+CoreDataClass.swift"; path = "CoreData/Comments+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A788D97206B86CF006BC7D2 /* Comments+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Comments+CoreDataProperties.swift"; path = "CoreData/Comments+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A788D98206B86CF006BC7D2 /* Issues+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Issues+CoreDataClass.swift"; path = "CoreData/Issues+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A788D99206B86CF006BC7D2 /* Issues+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Issues+CoreDataProperties.swift"; path = "CoreData/Issues+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A788D9A206B86CF006BC7D2 /* Repository+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Repository+CoreDataClass.swift"; path = "CoreData/Repository+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A788D9B206B86CF006BC7D2 /* Repository+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Repository+CoreDataProperties.swift"; path = "CoreData/Repository+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1A966A9C204F10DA003AEA9E /* IssueTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewController.swift; sourceTree = "<group>"; };
 		1A966A9E204F1A41003AEA9E /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
 		1AA2D08220625F7800C5A05C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Files/SWIFT/Elements/GitHub-Client-test/GitHub test/View/Assets.xcassets"; sourceTree = "<absolute>"; };
@@ -157,7 +169,6 @@
 				1A16B7012050231D00653DBB /* CommentData.swift */,
 				1A2BFD682048854600B19177 /* CoreDataHandler.swift */,
 				1ACEAD2F2068C7AD00AEE525 /* Variables.swift */,
-				1A2BFD712048922C00B19177 /* ReposData.xcdatamodeld */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -187,6 +198,13 @@
 		1AD261B92068F8B7006C4F57 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				1A2BFD712048922C00B19177 /* ReposData.xcdatamodeld */,
+				1A788D96206B86CF006BC7D2 /* Comments+CoreDataClass.swift */,
+				1A788D97206B86CF006BC7D2 /* Comments+CoreDataProperties.swift */,
+				1A788D98206B86CF006BC7D2 /* Issues+CoreDataClass.swift */,
+				1A788D99206B86CF006BC7D2 /* Issues+CoreDataProperties.swift */,
+				1A788D9A206B86CF006BC7D2 /* Repository+CoreDataClass.swift */,
+				1A788D9B206B86CF006BC7D2 /* Repository+CoreDataProperties.swift */,
 				1AD261BA2068F9B8006C4F57 /* UserStorage.swift */,
 				1AD261BE20691EA3006C4F57 /* RepositoriesStorage.swift */,
 				1AD261C020692A5A006C4F57 /* IssuesStorage.swift */,
@@ -261,7 +279,13 @@
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -377,13 +401,19 @@
 				1A370D892068E05A00A13348 /* UserAPI.swift in Sources */,
 				1A2BFD732048922C00B19177 /* ReposData.xcdatamodeld in Sources */,
 				1A2BFD692048854600B19177 /* CoreDataHandler.swift in Sources */,
+				1A788DA1206B86CF006BC7D2 /* Repository+CoreDataProperties.swift in Sources */,
 				1A6D7E93204B29B700416370 /* RepositoryTableViewCell.swift in Sources */,
 				1AD261C920692F09006C4F57 /* CommentsStorage.swift in Sources */,
 				1A2BFD6320482D2700B19177 /* LogInController.swift in Sources */,
 				1A966A9D204F10DA003AEA9E /* IssueTableViewController.swift in Sources */,
+				1A788D9D206B86CF006BC7D2 /* Comments+CoreDataProperties.swift in Sources */,
 				1A2BFD672048812D00B19177 /* UserData.swift in Sources */,
+				1A788D9C206B86CF006BC7D2 /* Comments+CoreDataClass.swift in Sources */,
+				1A788DA0206B86CF006BC7D2 /* Repository+CoreDataClass.swift in Sources */,
 				1AD261BB2068F9B8006C4F57 /* UserStorage.swift in Sources */,
+				1A788D9E206B86CF006BC7D2 /* Issues+CoreDataClass.swift in Sources */,
 				1A5A26CA204C2C26008E1F2A /* IssueData.swift in Sources */,
+				1A788D9F206B86CF006BC7D2 /* Issues+CoreDataProperties.swift in Sources */,
 				1AD261C720692EFB006C4F57 /* CommentsServices.swift in Sources */,
 				1A370D952068ED6400A13348 /* UserServices.swift in Sources */,
 				1A370D8B2068E06B00A13348 /* RepositoriesAPI.swift in Sources */,
@@ -536,12 +566,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "GitHub test/GitHub test.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M27452296M;
 				INFOPLIST_FILE = "GitHub test/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Marchenko.GitHub-test";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Marchenko.GitHub-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -553,12 +586,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "GitHub test/GitHub test.entitlements";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Nikita Marchenko (M27452296M)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = M27452296M;
 				INFOPLIST_FILE = "GitHub test/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Marchenko.GitHub-test";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Marchenko.GitHub-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "33e0660a-08d7-4331-978d-e0292e900d55";
+				PROVISIONING_PROFILE_SPECIFIER = "Git client ad Hoc";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
