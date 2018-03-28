@@ -10,7 +10,7 @@ import UIKit
 
 class IssueTableViewController: UITableViewController {
     
-    var repository = Repository()
+    var repository: Repository!
     var issuesArray: [Issues] = []
     let variable = Variables()
     let issueService = IssuesService()

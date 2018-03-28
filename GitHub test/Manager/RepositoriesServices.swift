@@ -19,21 +19,21 @@ class RepositoryServices {
         provider.request(.getRepositories(username: variable.login)) { response in
             if let value = response.value, value.statusCode == 200 {
                 let data = value.data
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                let context = appDelegate.persistentContainer.newBackgroundContext()
+                let decoder = JSONDecoder()
+                decoder.userInfo[CodingUserInfoKey(rawValue: "context")!] = context
                 
                 do {
-                    let reposData = try JSONDecoder().decode([ReposData].self, from: data)
+                    _ = try JSONDecoder().decode([Repository].self, from: data)
                     DispatchQueue.main.async {
                         self.repositories.clear()
-                        self.repositories.save(repositories: reposData)
+                        saveData(context: context)
                         
                         success()
                     }
                 } catch {
-                    if let err = response.error?.localizedDescription {
-                        failed(err)
-                    } else {
-                        failed("So big problem")
-                    }
+                    failed(error.localizedDescription)
                 }
             } else {
                 if let err = response.error?.localizedDescription {

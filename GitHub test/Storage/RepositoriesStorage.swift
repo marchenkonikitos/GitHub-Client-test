@@ -10,13 +10,11 @@ import Foundation
 import CoreData
 
 class RepositoriesStorage {
-    func save(repositories: [ReposData]) {
+    func save(repositories: [Repository]) {
         repositories.forEach { (repository) in
             let context = getContext()
             let entityDescription = NSEntityDescription.entity(forEntityName: "Repository", in: context)!
             let repos = Repository.init(entity: entityDescription, insertInto: context)
-            
-            
             
             repos.id = repository.id
             repos.name = repository.name

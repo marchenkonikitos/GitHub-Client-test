@@ -11,7 +11,7 @@ import UIKit
 class CommentsTableViewController: UITableViewController {
     
     var issue = Issues()
-    var repository = Repository()
+    var repository: Repository!
     var commentsArray: [Comments] = []
     let variable = Variables()
     let commentService = CommentsServices()

@@ -9,5 +9,6 @@ target 'GitHub test' do
   pod 'ObjectMapper'
   pod 'Moya-ObjectMapper'
   pod 'KeychainSwift'
+  pod 'IQKeyboardManager'
 
 end
