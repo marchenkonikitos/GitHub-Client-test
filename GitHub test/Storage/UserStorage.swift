@@ -27,10 +27,14 @@ class UserStorage {
         UserDefaults.standard.set(userData.publicRepos, forKey: "numberOfRepos")
     }
     
-    func getUserLogin() -> String{
+    func getUserLogin() -> String {
         if let hash = keyChain.get("base64Credentials") {
             return hash
         }
         return ""
+    }
+    
+    func delete() {
+        self.keyChain.clear()
     }
 }

@@ -68,7 +68,6 @@ func loadIssues() -> [Issues] {
 
 func clearIssues() -> Bool {
     let context = getContext()
-    
     let delete = NSBatchDeleteRequest(fetchRequest: Issues.fetchRequest())
     
     do {

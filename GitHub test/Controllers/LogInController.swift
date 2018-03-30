@@ -20,14 +20,6 @@ class LogInController: UIViewController {
         super.viewDidLoad()
 
         signButton.layer.cornerRadius = 10
-        
-        if userService.isAuth {
-            userService.getUser(success: {
-                self.loginComplete()
-            }) {
-                self.wrongData()
-            }
-        }
     }
 
     @IBAction func signInPressed(_ sender: Any) {
@@ -35,7 +27,7 @@ class LogInController: UIViewController {
         let username = loginTextField.text
         let password = passwordTextField.text
         
-        if (username == "" || password == "") {
+        if username == "" || password == "" {
             shakeButton()
             return
         }

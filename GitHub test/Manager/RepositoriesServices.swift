@@ -17,25 +17,20 @@ class RepositoryServices {
     
     func getRepositories(success: @escaping () -> Void, failed: @escaping (String) -> Void) {
         provider.request(.getRepositories(username: variable.login)) { response in
-            if let value = response.value, value.statusCode == 200 {
+            do {
+                _ = try response.value?.filterSuccessfulStatusCodes()
+                let value = response.value!
                 let data = value.data
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 let context = appDelegate.persistentContainer.newBackgroundContext()
                 let decoder = JSONDecoder()
                 decoder.userInfo[CodingUserInfoKey(rawValue: "context")!] = context
                 
-                do {
-                    _ = try JSONDecoder().decode([Repository].self, from: data)
-                    DispatchQueue.main.async {
-                        self.repositories.clear()
-                        saveData(context: context)
-                        
-                        success()
-                    }
-                } catch {
-                    failed(error.localizedDescription)
-                }
-            } else {
+                _ = try JSONDecoder().decode([Repository].self, from: data)
+                self.repositories.clear()
+                saveData(context: context)
+                success()
+            } catch {
                 if let err = response.error?.localizedDescription {
                     failed(err)
                 } else {

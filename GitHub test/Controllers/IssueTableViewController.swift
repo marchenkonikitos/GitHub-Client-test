@@ -20,17 +20,8 @@ class IssueTableViewController: UITableViewController {
         
         let title = repository.name
         self.title = title
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.isNavigationBarHidden = false
         
-        let addButton = UIButton.init(type: .custom)
-        addButton.setImage(UIImage(named: "add"), for: UIControlState.normal)
-        addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
-        let barButton = UIBarButtonItem(customView: addButton)
-        self.navigationItem.rightBarButtonItem = barButton
-        
+        createRefreshController()
         getData()
     }
     
@@ -46,9 +37,18 @@ class IssueTableViewController: UITableViewController {
             })
     }
     
+    func createRefreshController() {
+        let refreshController = UIRefreshControl()
+        refreshController.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        refreshController.tintColor = .blue
+        refreshController.attributedTitle = NSAttributedString(string: "Refreshing")
+        tableView.addSubview(refreshController)
+    }
+    
     @objc
-    func addButtonPressed() {
-        self.performSegue(withIdentifier: "goToAddIssue", sender: self)
+    func refreshData(_ refresher: UIRefreshControl) {
+        getData()
+        refresher.endRefreshing()
     }
 
     // MARK: - Table view data source

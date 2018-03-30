@@ -22,6 +22,7 @@ class CommentsTableViewController: UITableViewController {
         let title = issue.title
         self.title = title
         
+        createRefreshController()
         getData()
     }
     
@@ -35,6 +36,20 @@ class CommentsTableViewController: UITableViewController {
             
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    func createRefreshController() {
+        let refreshController = UIRefreshControl()
+        refreshController.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        refreshController.tintColor = .blue
+        refreshController.attributedTitle = NSAttributedString(string: "Refreshing")
+        tableView.addSubview(refreshController)
+    }
+    
+    @objc
+    func refreshData(_ refresher: UIRefreshControl) {
+        getData()
+        refresher.endRefreshing()
     }
     
 
