@@ -11,7 +11,6 @@ import UIKit
 class ReposTableViewController: UITableViewController {
     
     @IBOutlet var userImage: UIImageView!
-    @IBOutlet var numberOfRepos: UILabel!
     
     private var repositoriesArray: [Repository] = []
     private let variable = Variables()
@@ -21,15 +20,8 @@ class ReposTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        createRefreshController()
         getData()
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        self.navigationController?.isNavigationBarHidden = true
-        
         changeUserImage()
         changeNumberOfRepos()
     }
@@ -37,27 +29,35 @@ class ReposTableViewController: UITableViewController {
     //MARK: -Change datas in header
     func changeUserImage() {
         self.userImage.layer.masksToBounds = true
-        self.userImage.layer.cornerRadius = self.userImage.frame.width / 2
+        self.userImage.layer.cornerRadius = self.userImage.frame.height / 2
         
         let imageData = userServices.getAvatar()
-        
-        self.userImage.image = UIImage(data: imageData as Data)
-        
-        let tapGesture = UILongPressGestureRecognizer(target: self, action: #selector(imageTapped))
-        tapGesture.minimumPressDuration = 0.0
-        userImage.isUserInteractionEnabled = true
-        self.userImage.addGestureRecognizer(tapGesture)
-        
+        self.userImage.image = UIImage(data: imageData as! Data)
     }
     
     func changeNumberOfRepos() {
-        self.numberOfRepos.text = "Repositories: \(UserDefaults.standard.value(forKey: "numberOfRepos")!)"
+        self.title = "Repositories: \(repositoriesArray.count)"
+    }
+    
+    func createRefreshController() {
+        let refreshController = UIRefreshControl()
+        refreshController.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        refreshController.tintColor = .gray
+        refreshController.attributedTitle = NSAttributedString(string: "Refreshing")
+        tableView.addSubview(refreshController)
+    }
+    
+    @objc
+    func refreshData(_ refresher: UIRefreshControl) {
+        getData()
+        changeNumberOfRepos()
+        refresher.endRefreshing()
     }
     
     @objc
     func imageTapped(gesture: UILongPressGestureRecognizer) {
         if gesture.state == .began {
-            self.numberOfRepos.text = UserDefaults.standard.value(forKey: "userName") as? String
+            self.navigationController?.title = UserDefaults.standard.value(forKey: "userName") as? String
         } else if gesture.state == .ended {
             changeNumberOfRepos()
         }
@@ -112,5 +112,18 @@ class ReposTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         (segue.destination as? IssueTableViewController)?.repository = selectedRepository!
+    }
+    
+    @IBAction func imagePressed(_ sender: Any) {
+    }
+    
+    
+    @IBAction func logoutPressed(_ sender: Any) {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        delegate.window?.rootViewController = sb.instantiateInitialViewController()
+        
+        
+        userServices.logOut()
     }
 }

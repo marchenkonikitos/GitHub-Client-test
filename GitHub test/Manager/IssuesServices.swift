@@ -16,24 +16,17 @@ class IssuesService {
     
     func getIssues(repository: Repository, success: @escaping () -> Void, failed: @escaping (String) -> Void) {
         provider.request(.getIssues(username: variable.login, repos: repository.name!)) { response in
-            if let value = response.value, value.statusCode == 200 {
-                let data = value.data
-                do {
-                    let issuesData = try JSONDecoder().decode([IssueData].self, from: data)
-                    DispatchQueue.main.async {
-                        self.issues.clear()
-                        self.issues.save(issues: issuesData, repository: repository)
-                        
-                        success()
-                    }
-                } catch {
-                    if let err = response.error?.localizedDescription {
-                        failed(err)
-                    } else {
-                        failed("So big problem")
-                    }
-                }
-            } else {
+            do {
+                _ = try response.value?.filterSuccessfulStatusCodes()
+                let value = response.value
+                let data = value?.data
+                let issuesData = try JSONDecoder().decode([IssueData].self, from: data!)
+                
+                self.issues.clear()
+                self.issues.save(issues: issuesData, repository: repository)
+                
+                success()
+            } catch {
                 if let err = response.error?.localizedDescription {
                     failed(err)
                 } else {

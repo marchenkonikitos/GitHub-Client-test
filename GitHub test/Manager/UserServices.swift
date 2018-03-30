@@ -16,32 +16,23 @@ class UserServices {
     
     var isAuth: Bool {
         get {
-            let hash = user.getUserLogin()
-            if hash != "" {
-                return true
-            } else {
-                return false
-            }
+            return user.getUserLogin() != ""
         }
     }
     
     private func getUserViaHash(hash: String, success: @escaping () -> Void, failed: @escaping () -> Void) {
         provider.request(.getUser(hash: hash)) { response in
             
-            if let value = response.value, value.statusCode == 200 {
+            do {
+                _ = try response.value?.filterSuccessfulStatusCodes()
+                let value = response.value!
+                
                 let data = value.data
                 
-                do {
-                    let userData = try JSONDecoder().decode(UserData.self, from: data)
-                    DispatchQueue.main.async {
-                        self.user.saveUserData(userData: userData)
-                        success()
-                    }
-                } catch {
-                    failed()
-                }
-            
-            } else {
+                let userData = try JSONDecoder().decode(UserData.self, from: data)
+                self.user.saveUserData(userData: userData)
+                success()
+            } catch {
                 failed()
             }
         }
@@ -70,10 +61,14 @@ class UserServices {
         })
     }
     
-    func getAvatar() -> NSData {
+    func getAvatar() -> NSData? {
         let imageURL = URL(string: UserDefaults.standard.value(forKey: "avatar_url") as! String)
         let data = NSData(contentsOf: imageURL!)
         
-        return data!
+        return data
+    }
+    
+    func logOut(){
+        user.delete()
     }
 }

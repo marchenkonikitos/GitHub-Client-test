@@ -24,11 +24,7 @@ public class Repository: NSManagedObject, Decodable {
 
     required convenience public init(from decoder: Decoder) throws {
         let context = getContext()
-    
-        
-//        guard let context = decoder.userInfo[CodingUserInfoKey(rawValue: "context")!] as? NSManagedObjectContext else { fatalError() }
         guard let entity = NSEntityDescription.entity(forEntityName: "Repository", in: context) else { fatalError() }
-
         
         self.init(entity: entity, insertInto: context)
         
