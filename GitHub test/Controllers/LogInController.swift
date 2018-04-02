@@ -37,12 +37,12 @@ class LogInController: UIViewController {
     func doLogin(usr: String, psw: String) {
         signButton.isEnabled = false
         
-        userService.login(username: usr, password: psw, success: {
+        userService.login(username: usr, password: psw).done {
             self.loginComplete()
-        }, failed: {
+        }.catch {_ in 
             self.wrongData()
             self.signButton.isEnabled = true
-        })
+        }
     }
     
     func shakeButton() {

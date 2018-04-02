@@ -8,6 +8,11 @@
 
 import Foundation
 import Moya
+import PromiseKit
+
+enum UserErrors: Error {
+    case wrondData
+}
 
 class UserServices {
     
@@ -20,45 +25,22 @@ class UserServices {
         }
     }
     
-    private func getUserViaHash(hash: String, success: @escaping () -> Void, failed: @escaping () -> Void) {
-        provider.request(.getUser(hash: hash)) { response in
-            
-            do {
-                _ = try response.value?.filterSuccessfulStatusCodes()
-                let value = response.value!
-                
-                let data = value.data
-                
-                let userData = try JSONDecoder().decode(UserData.self, from: data)
-                self.user.saveUserData(userData: userData)
-                success()
-            } catch {
-                failed()
-            }
+    func getData(_ hash: String) -> Promise<Void> {
+        return provider.request(.getUser(hash: hash))
+            .compactMap({ response -> UserData in
+                try JSONDecoder().decode(UserData.self, from: response.data)
+            }).done { user in
+                self.user.saveUserData(userData: user)
         }
     }
     
-    func login(username: String, password: String, success: @escaping () -> Void, failed: @escaping () -> Void) {
+    func login(username: String, password: String) -> Promise<Void>{
         let credentialData = "\(username):\(password)".data(using: String.Encoding.utf8)!
         let base64Credentials = credentialData.base64EncodedString(options: [])
         
         self.user.saveUser(hash: base64Credentials)
         
-        getUserViaHash(hash: base64Credentials, success: {
-            success()
-        }) {
-            failed()
-        }
-    }
-    
-    func getUser(success: @escaping () -> Void, failed: @escaping () -> Void) {
-        let login = user.getUserLogin()
-        
-        getUserViaHash(hash: login, success: {
-            success()
-        }, failed: {
-            failed()
-        })
+        return getData(base64Credentials)
     }
     
     func getAvatar() -> NSData? {

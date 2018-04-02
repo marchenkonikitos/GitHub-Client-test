@@ -35,5 +35,7 @@ public class Repository: NSManagedObject, Decodable {
         self.hasIssues = (try container.decodeIfPresent(Bool.self, forKey: .hasIssues))!
         self.htmlUrl = try container.decodeIfPresent(String.self, forKey: .htmlUrl)
         self.openIssuesCount = (try container.decodeIfPresent(Int32.self, forKey: .openIssuesCount))!
+        
+        try context.save()
     }
 }
