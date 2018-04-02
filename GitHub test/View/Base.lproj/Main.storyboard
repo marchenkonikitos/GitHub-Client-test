@@ -238,8 +238,8 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" id="kPi-RM-3Sb">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="add" id="zMq-mS-lxe">
-                            <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="zMq-mS-lxe">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="BrB-zj-HWQ" kind="show" id="FaC-4S-Mw7"/>
                             </connections>
@@ -253,7 +253,7 @@
             </objects>
             <point key="canvasLocation" x="2726.0869565217395" y="133.69565217391306"/>
         </scene>
-        <!--Comments Table View Controller-->
+        <!--Title-->
         <scene sceneID="tT1-Dz-5s2">
             <objects>
                 <tableViewController id="MET-Oj-ihA" customClass="CommentsTableViewController" customModule="GitHub_test" customModuleProvider="target" sceneMemberID="viewController">
@@ -303,6 +303,14 @@
                             <outlet property="delegate" destination="MET-Oj-ihA" id="3Rp-yQ-snY"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Title" id="EHI-gM-xrr">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="trash" id="271-DX-0e8">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="closePressed:" destination="MET-Oj-ihA" id="a0A-n8-Vm1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYF-c1-jFF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -319,7 +327,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FiE-At-uTX">
                                 <rect key="frame" x="20.666666666666657" y="104" width="372.66666666666674" height="30"/>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Body" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="THf-mT-Qz4">
@@ -387,7 +395,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="add" width="35" height="35"/>
         <image name="chat" width="35" height="35"/>
         <image name="git" width="33" height="33"/>
         <image name="issue" width="35" height="35"/>

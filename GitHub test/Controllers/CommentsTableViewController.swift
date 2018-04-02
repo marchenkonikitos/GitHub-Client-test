@@ -15,6 +15,7 @@ class CommentsTableViewController: UITableViewController {
     var commentsArray: [Comments] = []
     let variable = Variables()
     let commentService = CommentsServices()
+    let issuesService = IssuesService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,4 +81,14 @@ class CommentsTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    @IBAction func closePressed(_ sender: Any) {
+        issuesService.closeIssue(repository: repository.name!, number: Int(issue.number)).done {
+            self.navigationController?.popViewController(animated: true)
+            }.catch { error in
+                let alert = UIAlertController(title: "Problem", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+                
+                self.present(alert, animated: true, completion: nil)
+        }
+    }
 }

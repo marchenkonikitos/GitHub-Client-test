@@ -84,8 +84,12 @@ class IssueTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        (segue.destination as? CommentsTableViewController)?.issue = selectedIssue
-        (segue.destination as? CommentsTableViewController)?.repository = repository
+        if segue.identifier == "goToComments" {
+            (segue.destination as? CommentsTableViewController)?.issue = selectedIssue
+            (segue.destination as? CommentsTableViewController)?.repository = repository
+        } else {
+            (segue.destination as? CreateIssueController)?.repository = repository.name
+        }
     }
 
 }

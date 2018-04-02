@@ -11,7 +11,10 @@ import Moya
 import PromiseKit
 
 class IssuesService {
-    private let provider = MoyaProvider<IssuesTarget>()
+    private lazy var provider: MoyaProvider<IssuesTarget> = {
+        return MoyaProvider<IssuesTarget>(plugins: [AccessTokenPlugin(tokenClosure: UserStorage().getUserLogin())])
+    }()
+    
     private let variable = Variables()
     private let issues = IssuesStorage()
     
@@ -20,17 +23,18 @@ class IssuesService {
         return provider.request(.getIssues(username: variable.login, repos: repository.name!)).compactMap({ response -> [Issues] in
             try JSONDecoder().decode([Issues].self, from: response.data)
         }).done({ issue in
-//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//            let context = appDelegate.persistentContainer.newBackgroundContext()
-//            
-//            self.issues.clear()
-//            saveData(context: context)
         })
     }
     
-//    func createIssue() -> Promise<Void> {
-//        
-//    }
+    func createIssue(title: String, body: String, repository: String) -> Promise<Void> {
+        return provider.request(.createIssue(username: variable.login, repos: repository, title: title, body: body)).done({_ in
+        })
+    }
+    
+    func closeIssue(repository: String, number: Int) -> Promise<Void> {
+        return provider.request(.changeStatus(username: variable.login, repos: repository, number: number)).done({_ in 
+        })
+    }
     
     func loadIssues() -> [Issues] {
         return issues.load()
