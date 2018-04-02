@@ -135,8 +135,8 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Repositories: 0" id="BU0-Yl-hwY">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="logout" id="8SW-kD-MGy">
-                            <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="reply" id="8SW-kD-MGy">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="logoutPressed:" destination="omF-BS-WcC" id="alm-JL-sFC"/>
                             </connections>
@@ -398,7 +398,6 @@
         <image name="chat" width="35" height="35"/>
         <image name="git" width="33" height="33"/>
         <image name="issue" width="35" height="35"/>
-        <image name="logout" width="35" height="35"/>
         <image name="no-image" width="33" height="33"/>
     </resources>
 </document>
