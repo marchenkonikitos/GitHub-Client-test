@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -308,10 +308,10 @@
             </objects>
             <point key="canvasLocation" x="3493.5999999999999" y="133.5832083958021"/>
         </scene>
-        <!--View Controller-->
+        <!--Create issue-->
         <scene sceneID="KQ6-Ep-yiu">
             <objects>
-                <viewController id="BrB-zj-HWQ" sceneMemberID="viewController">
+                <viewController title="Create issue" id="BrB-zj-HWQ" customClass="CreateIssueController" customModule="GitHub_test" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pdr-ZN-Ym9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -338,6 +338,9 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="BrB-zj-HWQ" eventType="touchUpInside" id="BGt-9N-LOx"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -354,6 +357,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LXI-I7-zaC"/>
                     </view>
+                    <connections>
+                        <outlet property="bodyField" destination="THf-mT-Qz4" id="IiQ-BJ-fFS"/>
+                        <outlet property="submitButton" destination="Vt1-F3-FEO" id="UzE-W1-dX0"/>
+                        <outlet property="titleField" destination="FiE-At-uTX" id="UQH-xW-GNy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zft-42-e2z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

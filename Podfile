@@ -10,5 +10,5 @@ target 'GitHub test' do
   pod 'Moya-ObjectMapper'
   pod 'KeychainSwift'
   pod 'IQKeyboardManager'
-
+  pod 'PromiseKit'
 end

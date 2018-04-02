@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 class ReposTableViewController: UITableViewController {
     
@@ -63,16 +64,16 @@ class ReposTableViewController: UITableViewController {
         }
     }
     
-    //MARK: -Get and save repositories and issues data
+    //MARK: -Get and save repositories
     func getData() {
-        repositoriesService.getRepositories(success: {
+        repositoriesService.getRepositories().done {
             self.repositoriesArray = self.repositoriesService.loadRepos()
             self.tableView.reloadData()
-        }, failed: { error in
-            let alert = UIAlertController(title: "Problem", message: error, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        })
+            }.catch { error in
+                let alert = UIAlertController(title: "Problem", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+        }
     }
     
     
@@ -115,6 +116,7 @@ class ReposTableViewController: UITableViewController {
     }
     
     @IBAction func imagePressed(_ sender: Any) {
+        debugPrint("pressed")
     }
     
     

@@ -8,33 +8,29 @@
 
 import Foundation
 import Moya
+import PromiseKit
 
 class IssuesService {
     private let provider = MoyaProvider<IssuesTarget>()
     private let variable = Variables()
     private let issues = IssuesStorage()
     
-    func getIssues(repository: Repository, success: @escaping () -> Void, failed: @escaping (String) -> Void) {
-        provider.request(.getIssues(username: variable.login, repos: repository.name!)) { response in
-            do {
-                _ = try response.value?.filterSuccessfulStatusCodes()
-                let value = response.value
-                let data = value?.data
-                let issuesData = try JSONDecoder().decode([IssueData].self, from: data!)
-                
-                self.issues.clear()
-                self.issues.save(issues: issuesData, repository: repository)
-                
-                success()
-            } catch {
-                if let err = response.error?.localizedDescription {
-                    failed(err)
-                } else {
-                    failed("So big problem")
-                }
-            }
-        }
+    func getIssues(repository: Repository) -> Promise<Void> {
+        issues.clear()
+        return provider.request(.getIssues(username: variable.login, repos: repository.name!)).compactMap({ response -> [Issues] in
+            try JSONDecoder().decode([Issues].self, from: response.data)
+        }).done({ issue in
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//            let context = appDelegate.persistentContainer.newBackgroundContext()
+//            
+//            self.issues.clear()
+//            saveData(context: context)
+        })
     }
+    
+//    func createIssue() -> Promise<Void> {
+//        
+//    }
     
     func loadIssues() -> [Issues] {
         return issues.load()

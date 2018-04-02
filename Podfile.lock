@@ -14,6 +14,15 @@ PODS:
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
   - ObjectMapper (3.0.0)
+  - PromiseKit (6.2.1):
+    - PromiseKit/CorePromise (= 6.2.1)
+    - PromiseKit/Foundation (= 6.2.1)
+    - PromiseKit/UIKit (= 6.2.1)
+  - PromiseKit/CorePromise (6.2.1)
+  - PromiseKit/Foundation (6.2.1):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.2.1):
+    - PromiseKit/CorePromise
   - Result (3.2.4)
 
 DEPENDENCIES:
@@ -24,6 +33,7 @@ DEPENDENCIES:
   - Moya
   - Moya-ObjectMapper
   - ObjectMapper
+  - PromiseKit
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
@@ -33,8 +43,9 @@ SPEC CHECKSUMS:
   Moya: 2b0531a9fef318e0bc484030c3db1e6f279ccb66
   Moya-ObjectMapper: 167adf69db0298bf3a19ea05cb9a16ee117c8ef5
   ObjectMapper: 92230db59bf8f341a5c3a3cf0b9fbdde3cf0d87f
+  PromiseKit: edaca6f0a7ed73b08c287600537d13867a7fabc7
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
 
-PODFILE CHECKSUM: 2d4d1341e6e079d7f0da3de8bd91a2eea12a73fa
+PODFILE CHECKSUM: 48a4e6502d7a25fd76f22fcd1f9a99bacbc785e3
 
 COCOAPODS: 1.3.1

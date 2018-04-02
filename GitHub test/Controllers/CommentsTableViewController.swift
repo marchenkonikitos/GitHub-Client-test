@@ -10,7 +10,7 @@ import UIKit
 
 class CommentsTableViewController: UITableViewController {
     
-    var issue = Issues()
+    var issue: Issues!
     var repository: Repository!
     var commentsArray: [Comments] = []
     let variable = Variables()
@@ -27,14 +27,14 @@ class CommentsTableViewController: UITableViewController {
     }
     
     func getData() {
-        commentService.getComments(repository: repository, issue: issue, success: {
+        commentService.getComments(repository: repository.name!, issue: issue).done {
             self.commentsArray = self.commentService.loadIssues()
             self.tableView.reloadData()
-        }) { error in
-            let alert = UIAlertController(title: "Problem", message: error, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
-            
-            self.present(alert, animated: true, completion: nil)
+            }.catch { error in
+                let alert = UIAlertController(title: "Problem", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+                
+                self.present(alert, animated: true, completion: nil)
         }
     }
     

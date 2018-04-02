@@ -10,18 +10,6 @@ import Foundation
 import CoreData
 
 class CommentsStorage {
-    func save(comments: [CommentData], issue: Issues) {
-        comments.forEach { (comment) in
-            let context = getContext()
-            let commentObj = NSEntityDescription.insertNewObject(forEntityName: "Comments", into: context) as! Comments
-            
-            commentObj.body = comment.body
-            commentObj.htmlUrl = comment.htmlUrl
-            commentObj.issues = issue
-            
-            saveData(context: context)
-        }
-    }
     
     func clear() {
         guard clearComments() else { return }
