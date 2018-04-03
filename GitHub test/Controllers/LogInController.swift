@@ -24,14 +24,14 @@ class LogInController: UIViewController {
 
     @IBAction func signInPressed(_ sender: Any) {
         
-        let username = loginTextField.text
-        let password = passwordTextField.text
+        let username = loginTextField.text!
+        let password = passwordTextField.text!
         
-        if username == "" || password == "" {
+        if username.isEmpty || password.isEmpty {
             shakeButton()
             return
         }
-        doLogin(usr: username!, psw: password!)
+        doLogin(usr: username, psw: password)
     }
     
     func doLogin(usr: String, psw: String) {
@@ -46,23 +46,8 @@ class LogInController: UIViewController {
     }
     
     func shakeButton() {
-        let animation1 = CABasicAnimation(keyPath: "position")
-        animation1.duration = 0.07
-        animation1.repeatCount = 2
-        animation1.autoreverses = true
-        animation1.fromValue = NSValue(cgPoint: CGPoint(x: loginTextField.center.x - 5, y: loginTextField.center.y))
-        animation1.toValue = NSValue(cgPoint: CGPoint(x: loginTextField.center.x + 5, y: loginTextField.center.y))
-        
-        loginTextField.layer.add(animation1, forKey: "position")
-        
-        let animation2 = CABasicAnimation(keyPath: "position")
-        animation2.duration = 0.07
-        animation2.repeatCount = 2
-        animation2.autoreverses = true
-        animation2.fromValue = NSValue(cgPoint: CGPoint(x: passwordTextField.center.x - 5, y: passwordTextField.center.y))
-        animation2.toValue = NSValue(cgPoint: CGPoint(x: passwordTextField.center.x + 5, y: passwordTextField.center.y))
-        
-        passwordTextField.layer.add(animation2, forKey: "position")
+        loginTextField.shakeAnimation(duration: 0.07, repeatCount: 2)
+        passwordTextField.shakeAnimation(duration: 0.07, repeatCount: 2)
     }
     
     func wrongData() {
@@ -76,7 +61,6 @@ class LogInController: UIViewController {
     }
     
     func loginComplete() {
-        
         UIView.animate(withDuration: 0.3, animations: {
             self.signButton.backgroundColor = .green
             self.signButton.setTitle("Confirmed", for: .normal)

@@ -22,14 +22,9 @@ class RepositoryServices {
     
     func getRepositories() -> Promise<Void> {
         repositories.clear()
-        return provider.request(.getRepositories(username: variable.login)).compactMap({ response -> [Repository] in
+        return provider.request(.getRepositories(username: variable.login)).compactMap({ response in
             try JSONDecoder().decode([Repository].self, from: response.data)
-        }).done { repository in
-//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//            let context = appDelegate.persistentContainer.newBackgroundContext()
-            
-//            saveData(context: context)
-        }
+        }).asVoid()
     }
     
     func loadRepos() -> [Repository]{

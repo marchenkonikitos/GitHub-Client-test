@@ -19,13 +19,7 @@ class CommentsServices {
         comments.clear()
         return provider.request(.getComments(username: variable.login, repository: repository, number: Int(issue.number))).compactMap({ response -> [Comments] in
             try JSONDecoder().decode([Comments].self, from: response.data)
-        }).done({ issue in
-            //            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            //            let context = appDelegate.persistentContainer.newBackgroundContext()
-            //
-            //            self.issues.clear()
-            //            saveData(context: context)
-        })
+        }).asVoid()
     }
     
     func loadIssues() -> [Comments] {

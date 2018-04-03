@@ -16,6 +16,7 @@ public class Comments: NSManagedObject, Decodable {
     enum CodingKeys: String, CodingKey {
         case body
         case htmlUrl = "html_url"
+        case id
     }
     
     required convenience public init(from decoder: Decoder) throws {
@@ -27,6 +28,7 @@ public class Comments: NSManagedObject, Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.body = try container.decodeIfPresent(String.self, forKey: .body)
         self.htmlUrl = (try container.decodeIfPresent(String.self, forKey: .htmlUrl))!
+        self.id = try container.decodeIfPresent(Int32.self, forKey: .id) ?? 0
         
         try context.save()
     }

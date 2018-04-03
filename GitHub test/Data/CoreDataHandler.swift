@@ -56,9 +56,11 @@ func clearRepositories() -> Bool {
 func loadIssues() -> [Issues] {
     let context = getContext()
     var issues: [Issues] = []
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Issues")
+    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "comments", ascending: false)]
     
     do {
-        issues = try context.fetch(Issues.fetchRequest())
+        issues = try context.fetch(fetchRequest) as! [Issues]
         return issues
     } catch {
         print("\nError loading issue array")
@@ -68,10 +70,10 @@ func loadIssues() -> [Issues] {
 
 func clearIssues() -> Bool {
     let context = getContext()
-    let delete = NSBatchDeleteRequest(fetchRequest: Issues.fetchRequest())
     
     do {
-        try context.execute(delete)
+        try context.fetch(Issues.fetchRequest()).forEach(context.delete)
+        try context.save()
         return true
     } catch {
         debugPrint(error.localizedDescription)
@@ -95,10 +97,11 @@ func loadComments() -> [Comments] {
 
 func clearComments() -> Bool {
     let context = getContext()
-    let delete = NSBatchDeleteRequest(fetchRequest: Comments.fetchRequest())
     
     do {
-        try context.execute(delete)
+        try context.fetch(Comments.fetchRequest()).forEach(context.delete)
+        try context.save()
+        
         return true
     } catch {
         return false

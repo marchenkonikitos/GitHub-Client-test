@@ -20,9 +20,7 @@ class UserServices {
     private let user = UserStorage()
     
     var isAuth: Bool {
-        get {
-            return user.getUserLogin() != ""
-        }
+        return user.getUserLogin() != ""
     }
     
     func getData(_ hash: String) -> Promise<Void> {
@@ -38,9 +36,9 @@ class UserServices {
         let credentialData = "\(username):\(password)".data(using: String.Encoding.utf8)!
         let base64Credentials = credentialData.base64EncodedString(options: [])
         
-        self.user.saveUser(hash: base64Credentials)
-        
-        return getData(base64Credentials)
+        return getData(base64Credentials).done {
+            self.user.saveUser(hash: base64Credentials)
+        }
     }
     
     func getAvatar() -> NSData? {
