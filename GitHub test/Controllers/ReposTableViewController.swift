@@ -18,10 +18,16 @@ class ReposTableViewController: UITableViewController {
     private let repositoriesService = RepositoryServices()
     private let userServices = UserServices()
     
-
+    lazy var refreshController = {
+        let rc = UIRefreshControl()
+        rc.addTarget(self, action: #selector(self.refreshData(_:)), for: .valueChanged)
+        rc.tintColor = .gray
+        rc.attributedTitle = NSAttributedString(string: "Refreshing")
+        self.tableView.addSubview(rc)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        createRefreshController()
         getData()
         changeUserImage()
         changeNumberOfRepos()
@@ -38,14 +44,6 @@ class ReposTableViewController: UITableViewController {
     
     func changeNumberOfRepos() {
         self.title = "Repositories: \(repositoriesArray.count)"
-    }
-    
-    func createRefreshController() {
-        let refreshController = UIRefreshControl()
-        refreshController.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        refreshController.tintColor = .gray
-        refreshController.attributedTitle = NSAttributedString(string: "Refreshing")
-        tableView.addSubview(refreshController)
     }
     
     @objc

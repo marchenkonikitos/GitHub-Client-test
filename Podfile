@@ -11,4 +11,5 @@ target 'GitHub test' do
   pod 'KeychainSwift'
   pod 'IQKeyboardManager'
   pod 'PromiseKit'
+  pod 'netfox'
 end

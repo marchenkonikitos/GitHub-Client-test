@@ -7,15 +7,31 @@
 //
 
 import UIKit
+import CoreData
 
 class CommentsTableViewController: UITableViewController {
     
     var issue: Issues!
     var repository: Repository!
-    var commentsArray: [Comments] = []
     let variable = Variables()
     let commentService = CommentsServices()
     let issuesService = IssuesService()
+    
+    lazy var fetchedResultsController: NSFetchedResultsController<Comments> = {
+        let request = NSFetchRequest<Comments>(entityName: "Comments")
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let sortDescriptor = NSSortDescriptor(key: "id", ascending: false)
+        request.sortDescriptors = [sortDescriptor]
+        
+        let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        frc.delegate = self
+        do {
+            try frc.performFetch()
+        } catch {
+            debugPrint(error.localizedDescription)
+        }
+        return frc
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +44,7 @@ class CommentsTableViewController: UITableViewController {
     }
     
     func getData() {
-        commentService.getComments(repository: repository.name!, issue: issue).done {
-            self.commentsArray = self.commentService.loadIssues()
-            self.tableView.reloadData()
-            }.catch { error in
+        commentService.getComments(repository: repository.name!, issue: issue).catch { error in
                 let alert = UIAlertController(title: "Problem", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
                 
@@ -42,7 +55,7 @@ class CommentsTableViewController: UITableViewController {
     func createRefreshController() {
         let refreshController = UIRefreshControl()
         refreshController.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        refreshController.tintColor = .blue
+        refreshController.tintColor = .gray
         refreshController.attributedTitle = NSAttributedString(string: "Refreshing")
         tableView.addSubview(refreshController)
     }
@@ -63,16 +76,17 @@ class CommentsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return commentsArray.count
+        if let count = fetchedResultsController.sections?[section].numberOfObjects {
+            return count
+        }
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath) as! CommentsTableViewCell
         
-        if (commentsArray.count > 0) && (commentsArray.count > indexPath.row) {
-            let commentForCell = commentsArray[indexPath.row]
-            cell.initCell(comment: commentForCell)
-        }
+        let comment = fetchedResultsController.object(at: indexPath)
+        cell.initCell(comment: comment)
 
         return cell
     }
@@ -92,3 +106,29 @@ class CommentsTableViewController: UITableViewController {
         }
     }
 }
+
+extension CommentsTableViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .update:
+            tableView.reloadRows(at: [indexPath!], with: .fade)
+        case .move:
+            if let indexPath = indexPath, let newIndexPath = newIndexPath {
+                tableView.moveRow(at: indexPath, to: newIndexPath)
+            }
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+}
+

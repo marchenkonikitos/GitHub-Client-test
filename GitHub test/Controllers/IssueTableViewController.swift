@@ -7,13 +7,29 @@
 //
 
 import UIKit
+import CoreData
 
 class IssueTableViewController: UITableViewController {
     
     var repository: Repository!
-    var issuesArray: [Issues] = []
     let variable = Variables()
     let issueService = IssuesService()
+
+    lazy var fetchedResultsController: NSFetchedResultsController<Issues> = {
+        let request = NSFetchRequest<Issues>(entityName: "Issues")
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let departmentSort = NSSortDescriptor(key: "comments", ascending: false)
+        request.sortDescriptors = [departmentSort]
+        
+        let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        frc.delegate = self
+        do {
+            try frc.performFetch()
+        } catch {
+            debugPrint(error.localizedDescription)
+        }
+        return frc
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,10 +42,7 @@ class IssueTableViewController: UITableViewController {
     }
     
     func getData() {
-        issueService.getIssues(repository: repository).done {
-            self.issuesArray = self.issueService.loadIssues()
-            self.tableView.reloadData()
-            }.catch { error in
+        issueService.getIssues(repository: repository).catch { error in
                 let alert = UIAlertController(title: "Problem", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
                 
@@ -40,7 +53,7 @@ class IssueTableViewController: UITableViewController {
     func createRefreshController() {
         let refreshController = UIRefreshControl()
         refreshController.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        refreshController.tintColor = .blue
+        refreshController.tintColor = .gray
         refreshController.attributedTitle = NSAttributedString(string: "Refreshing")
         tableView.addSubview(refreshController)
     }
@@ -60,16 +73,17 @@ class IssueTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return issuesArray.count
+        if let count = fetchedResultsController.sections?[section].numberOfObjects {
+            return count
+        }
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "issueCell", for: indexPath) as! IssueTableViewCell
         
-        if (issuesArray.count > 0) && (issuesArray.count > indexPath.row) {
-            let issueForCell = issuesArray[indexPath.row]
-            cell.initCell(issue: issueForCell)
-        }
+        let issue = fetchedResultsController.object(at: indexPath)
+        cell.initCell(issue: issue)
 
         return cell
     }
@@ -78,18 +92,71 @@ class IssueTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        selectedIssue = issuesArray[indexPath.row]
+        selectedIssue = fetchedResultsController.object(at: indexPath)
         
         performSegue(withIdentifier: "goToComments", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToComments" {
-            (segue.destination as? CommentsTableViewController)?.issue = selectedIssue
-            (segue.destination as? CommentsTableViewController)?.repository = repository
-        } else {
-            (segue.destination as? CreateIssueController)?.repository = repository.name
-        }
+        (segue.destination as? CommentsTableViewController)?.issue = selectedIssue
+        (segue.destination as? CommentsTableViewController)?.repository = repository
     }
 
+    @IBAction func addIssuePressed(_ sender: Any) {
+        let alert = UIAlertController(title: "New issue", message: "Fill all fields", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.placeholder = "Title"
+        }
+        alert.addTextField { (textField) in
+            textField.placeholder = "Body"
+        }
+        
+        let sendAction = UIAlertAction(title: "Send", style: .default) { (action) in
+            if alert.textFields![0].text != "" && alert.textFields![1].text != "" {
+                self.issueService.createIssue(title: alert.textFields![0].text!, body: alert.textFields![1].text!, repository: self.repository.name!).catch { error in
+                        let alert = UIAlertController(title: "Problem", message: error.localizedDescription, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+                        
+                        self.present(alert, animated: true, completion: nil)
+                }
+            } else {
+                let alert = UIAlertController(title: "Empty field", message: "Fill all fields, please", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+            alert.dismiss(animated: true, completion: nil)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(sendAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension IssueTableViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .update:
+            tableView.reloadRows(at: [indexPath!], with: .fade)
+        case .move:
+            if let indexPath = indexPath, let newIndexPath = newIndexPath {
+                tableView.moveRow(at: indexPath, to: newIndexPath)
+            }
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
 }
