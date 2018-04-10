@@ -9,8 +9,9 @@
 import UIKit
 import CoreData
 import MessageUI
+import Swinject
 import UserNotifications
-import IQKeyboardManager
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.makeKeyAndVisible()
 
-        let userService = UserServices()
+        let userService = DIContainer.container.resolve(UserServices.self)!
         
         if userService.isAuth {
             let vC = storyboard.instantiateViewController(withIdentifier: "mainScreen")
@@ -34,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = vC
         }
         
-        IQKeyboardManager.shared().isEnabled = true
+        IQKeyboardManager.sharedManager().enable = true
         
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in

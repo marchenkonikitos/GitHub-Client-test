@@ -8,15 +8,16 @@
 
 import UIKit
 import PromiseKit
+import Swinject
 
 class ReposTableViewController: UITableViewController {
     
     @IBOutlet var userImage: UIImageView!
     
     private var repositoriesArray: [Repository] = []
-    private let variable = Variables()
-    private let repositoriesService = RepositoryServices()
-    private let userServices = UserServices()
+    private let variable = DIContainer.container.resolve(Variables.self)!
+    private let repositoriesService = DIContainer.container.resolve(RepositoryServices.self)!
+    private let userServices = DIContainer.container.resolve(UserServices.self)!
     
     lazy var refreshController = {
         let rc = UIRefreshControl()
@@ -31,6 +32,7 @@ class ReposTableViewController: UITableViewController {
         getData()
         changeUserImage()
         changeNumberOfRepos()
+        createRefreshController()
     }
     
     //MARK: -Change datas in header
@@ -44,6 +46,14 @@ class ReposTableViewController: UITableViewController {
     
     func changeNumberOfRepos() {
         self.title = "Repositories: \(repositoriesArray.count)"
+    }
+    
+    func createRefreshController() {
+        let refreshController = UIRefreshControl()
+        refreshController.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        refreshController.tintColor = .gray
+        refreshController.attributedTitle = NSAttributedString(string: "Refreshing")
+        tableView.addSubview(refreshController)
     }
     
     @objc

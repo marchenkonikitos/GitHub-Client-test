@@ -34,16 +34,51 @@
 		1A788DA1206B86CF006BC7D2 /* Repository+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A788D9B206B86CF006BC7D2 /* Repository+CoreDataProperties.swift */; };
 		1A966A9D204F10DA003AEA9E /* IssueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A966A9C204F10DA003AEA9E /* IssueTableViewController.swift */; };
 		1A966A9F204F1A41003AEA9E /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A966A9E204F1A41003AEA9E /* IssueTableViewCell.swift */; };
+		1AB373842073D02F00AE2DE3 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAE53220739A6F00A68407 /* PromiseKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1AB373852073D02F00AE2DE3 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAE51F2073946D00A68407 /* Alamofire.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1AB373862073D02F00AE2DE3 /* IQKeyboardManagerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAE5182073946C00A68407 /* IQKeyboardManagerSwift.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1AB3738B2073D25700AE2DE3 /* PromiseKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAE53220739A6F00A68407 /* PromiseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1AB3738D2073D25700AE2DE3 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAE51F2073946D00A68407 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1AB3738F2073D25700AE2DE3 /* IQKeyboardManagerSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAE5182073946C00A68407 /* IQKeyboardManagerSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1AB373902073D25800AE2DE3 /* KeychainSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAE5192073946C00A68407 /* KeychainSwift.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1AB373912073D25800AE2DE3 /* KeychainSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAE5192073946C00A68407 /* KeychainSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1AB373942073D25800AE2DE3 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAE5172073946C00A68407 /* Result.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1AB373952073D25800AE2DE3 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAE5172073946C00A68407 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1ACEAD302068C7AD00AEE525 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACEAD2F2068C7AD00AEE525 /* Variables.swift */; };
 		1AD261BB2068F9B8006C4F57 /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261BA2068F9B8006C4F57 /* UserStorage.swift */; };
-		1AD261BD20691C97006C4F57 /* RepositoriesServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261BC20691C97006C4F57 /* RepositoriesServices.swift */; };
+		1AD261BD20691C97006C4F57 /* RepositoryServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261BC20691C97006C4F57 /* RepositoryServices.swift */; };
 		1AD261BF20691EA3006C4F57 /* RepositoriesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261BE20691EA3006C4F57 /* RepositoriesStorage.swift */; };
 		1AD261C120692A5A006C4F57 /* IssuesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261C020692A5A006C4F57 /* IssuesStorage.swift */; };
 		1AD261C520692C27006C4F57 /* IssuesServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261C420692C27006C4F57 /* IssuesServices.swift */; };
 		1AD261C720692EFB006C4F57 /* CommentsServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261C620692EFB006C4F57 /* CommentsServices.swift */; };
 		1AD261C920692F09006C4F57 /* CommentsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261C820692F09006C4F57 /* CommentsStorage.swift */; };
-		5D0572CB7178EBCE5FF962BA /* Pods_GitHub_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA29D623ACA89062E6B097DF /* Pods_GitHub_test.framework */; };
+		1AE85DF22076489B00854DAB /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAE51A2073946C00A68407 /* Moya.framework */; };
+		1AE85DF32076489B00854DAB /* Moya.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAE51A2073946C00A68407 /* Moya.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1AE85DF5207648A900854DAB /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE85DF4207648A900854DAB /* Swinject.framework */; };
+		1AE85DF6207648AC00854DAB /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE85DF4207648A900854DAB /* Swinject.framework */; };
+		1AE85DF7207648AC00854DAB /* Swinject.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE85DF4207648A900854DAB /* Swinject.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1AE85DFB2076624200854DAB /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE85DFA2076624200854DAB /* DIContainer.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1AB373802073A4BC00AE2DE3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1AB373912073D25800AE2DE3 /* KeychainSwift.framework in Embed Frameworks */,
+				1AE85DF7207648AC00854DAB /* Swinject.framework in Embed Frameworks */,
+				1AB3738B2073D25700AE2DE3 /* PromiseKit.framework in Embed Frameworks */,
+				1AB373952073D25800AE2DE3 /* Result.framework in Embed Frameworks */,
+				1AB3738F2073D25700AE2DE3 /* IQKeyboardManagerSwift.framework in Embed Frameworks */,
+				1AE85DF32076489B00854DAB /* Moya.framework in Embed Frameworks */,
+				1AB3738D2073D25700AE2DE3 /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1A16B6FD2050131E00653DBB /* CommentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
@@ -78,15 +113,20 @@
 		1AA2D08220625F7800C5A05C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Files/SWIFT/Elements/GitHub-Client-test/GitHub test/View/Assets.xcassets"; sourceTree = "<absolute>"; };
 		1ACEAD2F2068C7AD00AEE525 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
 		1AD261BA2068F9B8006C4F57 /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
-		1AD261BC20691C97006C4F57 /* RepositoriesServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesServices.swift; sourceTree = "<group>"; };
+		1AD261BC20691C97006C4F57 /* RepositoryServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryServices.swift; sourceTree = "<group>"; };
 		1AD261BE20691EA3006C4F57 /* RepositoriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesStorage.swift; sourceTree = "<group>"; };
 		1AD261C020692A5A006C4F57 /* IssuesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesStorage.swift; sourceTree = "<group>"; };
 		1AD261C420692C27006C4F57 /* IssuesServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesServices.swift; sourceTree = "<group>"; };
 		1AD261C620692EFB006C4F57 /* CommentsServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsServices.swift; sourceTree = "<group>"; };
 		1AD261C820692F09006C4F57 /* CommentsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsStorage.swift; sourceTree = "<group>"; };
-		57E527C0CE54960E2DA1CAB9 /* Pods-GitHub test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHub test.release.xcconfig"; path = "Pods/Target Support Files/Pods-GitHub test/Pods-GitHub test.release.xcconfig"; sourceTree = "<group>"; };
-		7D46DE56CE9744413EAA9208 /* Pods-GitHub test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHub test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GitHub test/Pods-GitHub test.debug.xcconfig"; sourceTree = "<group>"; };
-		EA29D623ACA89062E6B097DF /* Pods_GitHub_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHub_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1ADAE5172073946C00A68407 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		1ADAE5182073946C00A68407 /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = Carthage/Build/iOS/IQKeyboardManagerSwift.framework; sourceTree = "<group>"; };
+		1ADAE5192073946C00A68407 /* KeychainSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainSwift.framework; path = Carthage/Build/iOS/KeychainSwift.framework; sourceTree = "<group>"; };
+		1ADAE51A2073946C00A68407 /* Moya.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Moya.framework; path = Carthage/Build/iOS/Moya.framework; sourceTree = "<group>"; };
+		1ADAE51F2073946D00A68407 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		1ADAE53220739A6F00A68407 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
+		1AE85DF4207648A900854DAB /* Swinject.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swinject.framework; path = Carthage/Build/iOS/Swinject.framework; sourceTree = "<group>"; };
+		1AE85DFA2076624200854DAB /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +134,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D0572CB7178EBCE5FF962BA /* Pods_GitHub_test.framework in Frameworks */,
+				1AB373902073D25800AE2DE3 /* KeychainSwift.framework in Frameworks */,
+				1AE85DF5207648A900854DAB /* Swinject.framework in Frameworks */,
+				1AB373942073D25800AE2DE3 /* Result.framework in Frameworks */,
+				1AB373842073D02F00AE2DE3 /* PromiseKit.framework in Frameworks */,
+				1AB373862073D02F00AE2DE3 /* IQKeyboardManagerSwift.framework in Frameworks */,
+				1AE85DF6207648AC00854DAB /* Swinject.framework in Frameworks */,
+				1AE85DF22076489B00854DAB /* Moya.framework in Frameworks */,
+				1AB373852073D02F00AE2DE3 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +162,6 @@
 			children = (
 				1A2BFD4F2048151500B19177 /* GitHub test */,
 				1A2BFD4E2048151500B19177 /* Products */,
-				B5885D7099188EEF52B4C1D6 /* Pods */,
 				D08C51430566FC83C21E2619 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -191,9 +237,10 @@
 			isa = PBXGroup;
 			children = (
 				1A370D942068ED6400A13348 /* UserServices.swift */,
-				1AD261BC20691C97006C4F57 /* RepositoriesServices.swift */,
+				1AD261BC20691C97006C4F57 /* RepositoryServices.swift */,
 				1AD261C420692C27006C4F57 /* IssuesServices.swift */,
 				1AD261C620692EFB006C4F57 /* CommentsServices.swift */,
+				1AE85DFA2076624200854DAB /* DIContainer.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -227,19 +274,16 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		B5885D7099188EEF52B4C1D6 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7D46DE56CE9744413EAA9208 /* Pods-GitHub test.debug.xcconfig */,
-				57E527C0CE54960E2DA1CAB9 /* Pods-GitHub test.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		D08C51430566FC83C21E2619 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EA29D623ACA89062E6B097DF /* Pods_GitHub_test.framework */,
+				1ADAE53220739A6F00A68407 /* PromiseKit.framework */,
+				1ADAE51F2073946D00A68407 /* Alamofire.framework */,
+				1ADAE5182073946C00A68407 /* IQKeyboardManagerSwift.framework */,
+				1ADAE5192073946C00A68407 /* KeychainSwift.framework */,
+				1ADAE51A2073946C00A68407 /* Moya.framework */,
+				1ADAE5172073946C00A68407 /* Result.framework */,
+				1AE85DF4207648A900854DAB /* Swinject.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -251,12 +295,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A2BFD5F2048151500B19177 /* Build configuration list for PBXNativeTarget "GitHub test" */;
 			buildPhases = (
-				581EB627F61661EC5EB883D3 /* [CP] Check Pods Manifest.lock */,
 				1A2BFD492048151500B19177 /* Sources */,
 				1A2BFD4A2048151500B19177 /* Frameworks */,
 				1A2BFD4B2048151500B19177 /* Resources */,
-				0DDA0C425C6B190D33F39A66 /* [CP] Embed Pods Frameworks */,
-				C84B568D611681C044A02F59 /* [CP] Copy Pods Resources */,
+				1ADAE531207394B700A68407 /* ShellScript */,
+				1AB373802073A4BC00AE2DE3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -326,74 +369,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0DDA0C425C6B190D33F39A66 /* [CP] Embed Pods Frameworks */ = {
+		1ADAE531207394B700A68407 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-GitHub test/Pods-GitHub test-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya-ObjectMapper/Moya_ObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
-				"${BUILT_PRODUCTS_DIR}/netfox/netfox.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Moya.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManager.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/KeychainSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PromiseKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Swinject.framework",
 			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locksmith.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/netfox.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GitHub test/Pods-GitHub test-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		581EB627F61661EC5EB883D3 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GitHub test-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C84B568D611681C044A02F59 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GitHub test/Pods-GitHub test-resources.sh\"\n";
-			showEnvVarsInLog = 0;
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -431,8 +425,9 @@
 				1AD261C520692C27006C4F57 /* IssuesServices.swift in Sources */,
 				1A16B6FE2050131E00653DBB /* CommentsTableViewController.swift in Sources */,
 				1A23FC57206E7CBB002B7380 /* MoyaProvider+PromiseKit.swift in Sources */,
-				1AD261BD20691C97006C4F57 /* RepositoriesServices.swift in Sources */,
+				1AD261BD20691C97006C4F57 /* RepositoryServices.swift in Sources */,
 				1A16B7002050132C00653DBB /* CommentsTableViewCell.swift in Sources */,
+				1AE85DFB2076624200854DAB /* DIContainer.swift in Sources */,
 				1A370D8D2068E07900A13348 /* IssuesAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,13 +567,16 @@
 		};
 		1A2BFD602048151500B19177 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7D46DE56CE9744413EAA9208 /* Pods-GitHub test.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "GitHub test/GitHub test.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M27452296M;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "GitHub test/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -592,13 +590,16 @@
 		};
 		1A2BFD612048151500B19177 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57E527C0CE54960E2DA1CAB9 /* Pods-GitHub test.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "GitHub test/GitHub test.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Nikita Marchenko (M27452296M)";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = M27452296M;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "GitHub test/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

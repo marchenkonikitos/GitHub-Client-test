@@ -9,6 +9,7 @@
 import Foundation
 import Moya
 import PromiseKit
+import Swinject
 
 enum UserErrors: Error {
     case wrondData
@@ -16,11 +17,16 @@ enum UserErrors: Error {
 
 class UserServices {
     
-    private let provider = MoyaProvider<UserTarget>()
-    private let user = UserStorage()
+    private let provider: MoyaProvider<UserTarget>
+    private let storage: UserStorage
     
     var isAuth: Bool {
-        return user.getUserLogin() != ""
+        return storage.getUserLogin() != ""
+    }
+    
+    init(provider: MoyaProvider<UserTarget>, storage: UserStorage) {
+        self.provider = provider
+        self.storage = storage
     }
     
     func getData(_ hash: String) -> Promise<Void> {
@@ -28,7 +34,7 @@ class UserServices {
             .compactMap({ response -> UserData in
                 try JSONDecoder().decode(UserData.self, from: response.data)
             }).done { user in
-                self.user.saveUserData(userData: user)
+                self.storage.saveUserData(userData: user)
         }
     }
     
@@ -36,8 +42,8 @@ class UserServices {
         let credentialData = "\(username):\(password)".data(using: String.Encoding.utf8)!
         let base64Credentials = credentialData.base64EncodedString(options: [])
         
-        return getData(base64Credentials).done {
-            self.user.saveUser(hash: base64Credentials)
+        return getData(base64Credentials).done {_ in
+            self.storage.saveUser(hash: base64Credentials)
         }
     }
     
@@ -49,6 +55,6 @@ class UserServices {
     }
     
     func logOut(){
-        user.delete()
+        storage.delete()
     }
 }

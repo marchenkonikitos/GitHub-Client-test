@@ -9,17 +9,21 @@
 import Foundation
 import Moya
 import PromiseKit
+import Swinject
 
 class IssuesService {
-    private lazy var provider: MoyaProvider<IssuesTarget> = {
-        return MoyaProvider<IssuesTarget>(plugins: [AccessTokenPlugin(tokenClosure: UserStorage().getUserLogin())])
-    }()
+    private var provider: MoyaProvider<IssuesTarget>
+    private let variable: Variables
+    private let storage: IssuesStorage
     
-    private let variable = Variables()
-    private let issues = IssuesStorage()
+    init(variable: Variables, storage: IssuesStorage, provider: MoyaProvider<IssuesTarget>) {
+        self.variable = variable
+        self.storage = storage
+        self.provider = provider
+    }
     
     func getIssues(repository: Repository) -> Promise<Void> {
-        issues.clear()
+        storage.clear()
         return provider.request(.getIssues(username: variable.login, repos: repository.name!)).compactMap({ response in
             try JSONDecoder().decode([Issues].self, from: response.data)
         }).asVoid()
@@ -36,6 +40,6 @@ class IssuesService {
     }
     
     func loadIssues() -> [Issues] {
-        return issues.load()
+        return storage.load()
     }
 }

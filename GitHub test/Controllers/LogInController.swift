@@ -14,7 +14,7 @@ class LogInController: UIViewController {
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var signButton: UIButton!
     
-    let userService = UserServices()
+    let userService = DIContainer.container.resolve(UserServices.self)!
     
     override func viewDidLoad() {
         super.viewDidLoad()
