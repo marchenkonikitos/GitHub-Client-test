@@ -8,13 +8,14 @@
 
 import UIKit
 import CoreData
+import Swinject
 
 class IssueTableViewController: UITableViewController {
     
     var repository: Repository!
-    let variable = Variables()
-    let issueService = IssuesService()
-
+    let variable = DIContainer.container.resolve(Variables.self)!
+    let service = DIContainer.container.resolve(IssuesService.self)!
+    
     lazy var fetchedResultsController: NSFetchedResultsController<Issues> = {
         let request = NSFetchRequest<Issues>(entityName: "Issues")
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -42,7 +43,7 @@ class IssueTableViewController: UITableViewController {
     }
     
     func getData() {
-        issueService.getIssues(repository: repository).catch { error in
+        service.getIssues(repository: repository).catch { error in
                 let alert = UIAlertController(title: "Problem", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
                 
@@ -113,7 +114,7 @@ class IssueTableViewController: UITableViewController {
         
         let sendAction = UIAlertAction(title: "Send", style: .default) { (action) in
             if alert.textFields![0].text != "" && alert.textFields![1].text != "" {
-                self.issueService.createIssue(title: alert.textFields![0].text!, body: alert.textFields![1].text!, repository: self.repository.name!).catch { error in
+                self.service.createIssue(title: alert.textFields![0].text!, body: alert.textFields![1].text!, repository: self.repository.name!).catch { error in
                         let alert = UIAlertController(title: "Problem", message: error.localizedDescription, preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
                         

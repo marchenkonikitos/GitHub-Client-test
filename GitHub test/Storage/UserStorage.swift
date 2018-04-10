@@ -9,7 +9,9 @@
 import Foundation
 import KeychainSwift
 
-class UserStorage {
+protocol UserProtocol { }
+
+class UserStorage : UserProtocol {
     private let keyChain = KeychainSwift()
     
     func saveUser(hash: String) {

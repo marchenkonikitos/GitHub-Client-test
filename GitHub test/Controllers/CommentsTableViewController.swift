@@ -8,14 +8,15 @@
 
 import UIKit
 import CoreData
+import Swinject
 
 class CommentsTableViewController: UITableViewController {
     
     var issue: Issues!
     var repository: Repository!
-    let variable = Variables()
-    let commentService = CommentsServices()
-    let issuesService = IssuesService()
+    let variable = DIContainer.container.resolve(Variables.self)!
+    let service = DIContainer.container.resolve(CommentsServices.self)!
+    let issuesService = DIContainer.container.resolve(IssuesService.self)!
     
     lazy var fetchedResultsController: NSFetchedResultsController<Comments> = {
         let request = NSFetchRequest<Comments>(entityName: "Comments")
@@ -44,7 +45,7 @@ class CommentsTableViewController: UITableViewController {
     }
     
     func getData() {
-        commentService.getComments(repository: repository.name!, issue: issue).catch { error in
+        service.getComments(repository: repository.name!, issue: issue).catch { error in
                 let alert = UIAlertController(title: "Problem", message: error.localizedDescription, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
                 
