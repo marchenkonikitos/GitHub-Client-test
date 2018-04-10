@@ -1,0 +1,5 @@
+github "Moya/Moya"
+github "evgenyneu/keychain-swift"
+github "hackiftekhar/IQKeyboardManager"
+github "mxcl/PromiseKit"
+github "Swinject/Swinject"
