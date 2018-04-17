@@ -11,18 +11,14 @@
 import Swinject
 import KeychainSwift
 import XCTest
+import Moya
 
 class GitHubTests: XCTestCase {
     func testAuth() {
-        let userService = DIContainer.container.resolve(UserServices.self)!
+        let userService = DIContainer.containerMock.resolve(UserServicesRealisation.self)
+        let userStorage = DIContainer.containerMock.resolve(UserStorageMock.self)
         
-        let keyChain = KeychainSwift()
-        let hash = keyChain.get("base64Credentials")
         
-        if hash != nil {
-            XCTAssertTrue(userService.isAuth)
-        } else {
-            XCTAssertFalse(userService.isAuth)
-        }
     }
+    
 }

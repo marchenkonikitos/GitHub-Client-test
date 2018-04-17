@@ -8,6 +8,7 @@
 
 import Foundation
 import Moya
+import UIKit
 
 enum UserTarget {
     case getUser(hash: String)
@@ -27,7 +28,7 @@ extension UserTarget: TargetType {
     }
     
     var sampleData: Data {
-        return Data()
+        return NSDataAsset(name: "userJSON")!.data
     }
     
     var task: Task {

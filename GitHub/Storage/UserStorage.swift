@@ -9,7 +9,12 @@
 import Foundation
 import KeychainSwift
 
-protocol UserProtocol { }
+protocol UserProtocol {
+    func saveUser(hash: String)
+    func saveUserData(userData: UserData)
+    func getUserLogin() -> String
+    func delete()
+}
 
 class UserStorage : UserProtocol {
     private let keyChain = KeychainSwift()
@@ -39,4 +44,18 @@ class UserStorage : UserProtocol {
     func delete() {
         self.keyChain.clear()
     }
+}
+
+class UserStorageMock : UserProtocol {
+    func saveUser(hash: String) { }
+    
+    func saveUserData(userData: UserData) { }
+    
+    func getUserLogin() -> String {
+        return "56rfgkmlnjk"
+    }
+    
+    func delete() { }
+    
+    
 }
