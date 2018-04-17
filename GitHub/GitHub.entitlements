@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)Marchenko.GitHub-test</string>
+		<string>$(AppIdentifierPrefix)Marchenko.GitHubTest</string>
 	</array>
 </dict>
 </plist>

@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import MessageUI
 import Swinject
 import UserNotifications
 import IQKeyboardManagerSwift
