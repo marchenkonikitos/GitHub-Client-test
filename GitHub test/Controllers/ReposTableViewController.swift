@@ -9,6 +9,7 @@
 import UIKit
 import PromiseKit
 import Swinject
+import CoreData
 
 class ReposTableViewController: UITableViewController {
     
@@ -18,6 +19,23 @@ class ReposTableViewController: UITableViewController {
     private let variable = DIContainer.container.resolve(Variables.self)!
     private let repositoriesService = DIContainer.container.resolve(RepositoryServices.self)!
     private let userServices = DIContainer.container.resolve(UserServices.self)!
+    
+    lazy var fetchedResultsController: NSFetchedResultsController<Repository> = {
+        let request = NSFetchRequest<Repository>(entityName: "Repository")
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let departmentSort = NSSortDescriptor(key: "id", ascending: false)
+        request.sortDescriptors = [departmentSort]
+        
+        let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        frc.delegate = self
+    
+        do {
+            try frc.performFetch()
+        } catch {
+            debugPrint(error.localizedDescription)
+        }
+        return frc
+    }()
     
     lazy var refreshController = {
         let rc = UIRefreshControl()
@@ -41,11 +59,11 @@ class ReposTableViewController: UITableViewController {
         self.userImage.layer.cornerRadius = self.userImage.frame.height / 2
         
         let imageData = userServices.getAvatar()
-        self.userImage.image = UIImage(data: imageData as! Data)
+        self.userImage.image = UIImage(data: imageData! as Data)
     }
     
     func changeNumberOfRepos() {
-        self.title = "Repositories: \(repositoriesArray.count)"
+        self.title = "Repositories: \(fetchedResultsController.fetchedObjects?.count ?? 0)"
     }
     
     func createRefreshController() {
@@ -75,12 +93,12 @@ class ReposTableViewController: UITableViewController {
     //MARK: -Get and save repositories
     func getData() {
         repositoriesService.getRepositories().done {
-            self.repositoriesArray = self.repositoriesService.loadRepos()
-            self.tableView.reloadData()
+            self.changeNumberOfRepos()
             }.catch { error in
-                let alert = UIAlertController(title: "Problem", message: error.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Problem", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -93,17 +111,18 @@ class ReposTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return repositoriesArray.count
+        if let count = fetchedResultsController.sections?[section].numberOfObjects {
+            return count
+        }
+        return 0
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reposCell", for: indexPath) as! RepositoryTableViewCell
         
-        if repositoriesArray.count > 0 {
-            let repositoryForCell = repositoriesArray[indexPath.row]
-            cell.initCell(repository: repositoryForCell)
-        }
+        let repository = fetchedResultsController.object(at: indexPath)
+        cell.initCell(repository: repository)
         
         return cell
     }
@@ -112,14 +131,12 @@ class ReposTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        repositoriesArray = loadRepositories()
-        selectedRepository = repositoriesArray[indexPath.row]
+        selectedRepository = fetchedResultsController.object(at: indexPath)
         
         performSegue(withIdentifier: "goToIssues", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         (segue.destination as? IssueTableViewController)?.repository = selectedRepository!
     }
     
@@ -133,7 +150,31 @@ class ReposTableViewController: UITableViewController {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         delegate.window?.rootViewController = sb.instantiateInitialViewController()
         
-        
         userServices.logOut()
+    }
+}
+
+extension ReposTableViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .update:
+            tableView.reloadRows(at: [indexPath!], with: .fade)
+        case .move:
+            if let indexPath = indexPath, let newIndexPath = newIndexPath {
+                tableView.moveRow(at: indexPath, to: newIndexPath)
+            }
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
     }
 }

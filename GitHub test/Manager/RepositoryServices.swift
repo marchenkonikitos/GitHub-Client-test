@@ -30,8 +30,7 @@ class RepositoryServices {
     func getRepositories() -> Promise<Void> {
         storage.clear()
         return provider.request(.getRepositories(username: variable.login)).compactMap({ response in
-            try JSONDecoder().decode([Repository].self, from: response.data)
-            JSONDecoder().keyDecodingStrategy = .convertFromSnakeCase
+            try _ = JSONDecoder().decode([Repository].self, from: response.data)
         }).asVoid()
     }
     

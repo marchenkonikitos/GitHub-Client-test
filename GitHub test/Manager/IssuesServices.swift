@@ -31,7 +31,7 @@ class IssuesService {
     
     func createIssue(title: String, body: String, repository: String) -> Promise<Void> {
         return provider.request(.createIssue(username: variable.login, repos: repository, title: title, body: body)).done({ response in
-            try JSONDecoder().decode(Issues.self, from: response.data)
+            try _ = JSONDecoder().decode(Issues.self, from: response.data)
         }).asVoid()
     }
     
