@@ -27,7 +27,7 @@ class UserStorage : UserProtocol {
         UserDefaults.standard.set(userData.id, forKey: "userId")
         UserDefaults.standard.set(userData.avatarUrl, forKey: "avatar_url")
         UserDefaults.standard.set(userData.login, forKey: "login")
-        UserDefaults.standard.set(userData.gistsUrl, forKey: "userUrl")
+        UserDefaults.standard.set(userData.url, forKey: "userUrl")
         UserDefaults.standard.set(userData.gistsUrl, forKey: "gists_url")
         UserDefaults.standard.set(userData.reposUrl, forKey: "repos_url")
         UserDefaults.standard.set(userData.name, forKey: "userName")
@@ -44,18 +44,4 @@ class UserStorage : UserProtocol {
     func delete() {
         self.keyChain.clear()
     }
-}
-
-class UserStorageMock : UserProtocol {
-    func saveUser(hash: String) { }
-    
-    func saveUserData(userData: UserData) { }
-    
-    func getUserLogin() -> String {
-        return "56rfgkmlnjk"
-    }
-    
-    func delete() { }
-    
-    
 }
