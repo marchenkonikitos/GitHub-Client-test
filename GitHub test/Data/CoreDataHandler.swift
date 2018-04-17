@@ -42,10 +42,10 @@ func loadRepositories() -> [Repository] {
 
 func clearRepositories() -> Bool {
     let context = getContext()
-    let delete = NSBatchDeleteRequest(fetchRequest: Repository.fetchRequest())
 
     do {
-        try context.execute(delete)
+        try context.fetch(Repository.fetchRequest()).forEach(context.delete)
+        try context.save()
         return true
     } catch {
         return false
@@ -76,7 +76,6 @@ func clearIssues() -> Bool {
         try context.save()
         return true
     } catch {
-        debugPrint(error.localizedDescription)
         return false
     }
 }

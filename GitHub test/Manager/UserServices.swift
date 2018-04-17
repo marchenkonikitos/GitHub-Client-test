@@ -15,7 +15,15 @@ enum UserErrors: Error {
     case wrondData
 }
 
-class UserServices {
+protocol UserServices {
+    var isAuth: Bool { get }
+    func getData(_ hash: String) -> Promise<Void>
+    func login(username: String, password: String) -> Promise<Void>
+    func getAvatar() -> NSData?
+    func logOut()
+}
+
+class UserServicesRealisation: UserServices {
     
     private let provider: MoyaProvider<UserTarget>
     private let storage: UserStorage
@@ -38,7 +46,7 @@ class UserServices {
         }
     }
     
-    func login(username: String, password: String) -> Promise<Void>{
+    func login(username: String, password: String) -> Promise<Void> {
         let credentialData = "\(username):\(password)".data(using: String.Encoding.utf8)!
         let base64Credentials = credentialData.base64EncodedString(options: [])
         
@@ -54,7 +62,7 @@ class UserServices {
         return data
     }
     
-    func logOut(){
+    func logOut() {
         storage.delete()
     }
 }

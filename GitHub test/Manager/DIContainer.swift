@@ -28,7 +28,7 @@ class DIContainer {
         }
         
         _container.register(MoyaProvider<CommentTarget>.self) { _ in
-            MoyaProvider<CommentTarget>(plugins: [AccessTokenPlugin(tokenClosure: UserStorage().getUserLogin())])
+            MoyaProvider<CommentTarget>()
         }
         
         _container.register(Variables.self) { _ in
@@ -52,7 +52,7 @@ class DIContainer {
         }
         
         _container.register(UserServices.self) { r in
-            UserServices(provider: r.resolve(MoyaProvider<UserTarget>.self )!,
+            UserServicesRealisation(provider: r.resolve(MoyaProvider<UserTarget>.self)!,
                                 storage: r.resolve(UserStorage.self)!)
         }
         _container.register(RepositoryServices.self) { r in

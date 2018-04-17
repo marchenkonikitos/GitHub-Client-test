@@ -15,7 +15,8 @@ class IssuesStorage {
         guard clearIssues() else { return }
     }
     
-    func load() -> [Issues]{
+    func load() -> [Issues] {
         return loadIssues()
     }
+    
 }
