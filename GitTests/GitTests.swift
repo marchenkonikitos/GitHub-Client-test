@@ -14,11 +14,16 @@ import XCTest
 import Moya
 
 class GitHubTests: XCTestCase {
+    
+    let userService = DIContainer.containerMock.resolve(UserServicesRealisation.self)
+    let userStorage = DIContainer.containerMock.resolve(UserStorageMock.self)
+    
     func testAuth() {
-        let userService = DIContainer.containerMock.resolve(UserServicesRealisation.self)
-        let userStorage = DIContainer.containerMock.resolve(UserStorageMock.self)
-        
-        
+        userService?.login(username: "1", password: "1").done {
+            
+            }.catch{ error in
+                XCTFail(error.localizedDescription)
+            }
     }
     
 }
