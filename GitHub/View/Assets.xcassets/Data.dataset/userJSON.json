@@ -1,0 +1,51 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf400
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \{\
+    "login": "marchenkonikitos",\
+    "id": 33900150,\
+    "avatar_url": "https://avatars0.githubusercontent.com/u/33900150?v=4",\
+    "gravatar_id": "",\
+    "url": "https://api.github.com/users/marchenkonikitos",\
+    "html_url": "https://github.com/marchenkonikitos",\
+    "followers_url": "https://api.github.com/users/marchenkonikitos/followers",\
+    "following_url": "https://api.github.com/users/marchenkonikitos/following\{/other_user\}",\
+    "gists_url": "https://api.github.com/users/marchenkonikitos/gists\{/gist_id\}",\
+    "starred_url": "https://api.github.com/users/marchenkonikitos/starred\{/owner\}\{/repo\}",\
+    "subscriptions_url": "https://api.github.com/users/marchenkonikitos/subscriptions",\
+    "organizations_url": "https://api.github.com/users/marchenkonikitos/orgs",\
+    "repos_url": "https://api.github.com/users/marchenkonikitos/repos",\
+    "events_url": "https://api.github.com/users/marchenkonikitos/events\{/privacy\}",\
+    "received_events_url": "https://api.github.com/users/marchenkonikitos/received_events",\
+    "type": "User",\
+    "site_admin": false,\
+    "name": "Marchenko Nikita",\
+    "company": null,\
+    "blog": "",\
+    "location": "Ukraine",\
+    "email": null,\
+    "hireable": null,\
+    "bio": "IOS developer\\r\\nSWIFT",\
+    "public_repos": 3,\
+    "public_gists": 0,\
+    "followers": 2,\
+    "following": 2,\
+    "created_at": "2017-11-22T13:09:07Z",\
+    "updated_at": "2018-03-26T06:28:49Z",\
+    "private_gists": 0,\
+    "total_private_repos": 0,\
+    "owned_private_repos": 0,\
+    "disk_usage": 680,\
+    "collaborators": 0,\
+    "two_factor_authentication": false,\
+    "plan": \{\
+        "name": "free",\
+        "space": 976562499,\
+        "collaborators": 0,\
+        "private_repos": 0\
+    \}\
+\}}

@@ -26,13 +26,13 @@ protocol UserServices {
 class UserServicesRealisation: UserServices {
     
     private let provider: MoyaProvider<UserTarget>
-    private let storage: UserStorage
+    private let storage: UserProtocol
     
     var isAuth: Bool {
         return storage.getUserLogin() != ""
     }
     
-    init(provider: MoyaProvider<UserTarget>, storage: UserStorage) {
+    init(provider: MoyaProvider<UserTarget>, storage: UserProtocol) {
         self.provider = provider
         self.storage = storage
     }
