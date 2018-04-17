@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1A2BFD4C2048151500B19177"
-               BuildableName = "GitHub test.app"
-               BlueprintName = "GitHub test"
-               ReferencedContainer = "container:GitHub test.xcodeproj">
+               BuildableName = "GitHub.app"
+               BlueprintName = "GitHub"
+               ReferencedContainer = "container:GitHub.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,19 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1AEC5B562085CFAA008DD852"
-               BuildableName = "GitHub Tests.xctest"
-               BlueprintName = "GitHub Tests"
-               ReferencedContainer = "container:GitHub test.xcodeproj">
+               BuildableName = "GitHubs.xctest"
+               BlueprintName = "GitHubs"
+               ReferencedContainer = "container:GitHub.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1AEC5B642085EC68008DD852"
+               BuildableName = "GitTests.xctest"
+               BlueprintName = "GitTests"
+               ReferencedContainer = "container:GitHub.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1A2BFD4C2048151500B19177"
-            BuildableName = "GitHub test.app"
-            BlueprintName = "GitHub test"
-            ReferencedContainer = "container:GitHub test.xcodeproj">
+            BuildableName = "GitHub.app"
+            BlueprintName = "GitHub"
+            ReferencedContainer = "container:GitHub.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1A2BFD4C2048151500B19177"
-            BuildableName = "GitHub test.app"
-            BlueprintName = "GitHub test"
-            ReferencedContainer = "container:GitHub test.xcodeproj">
+            BuildableName = "GitHub.app"
+            BlueprintName = "GitHub"
+            ReferencedContainer = "container:GitHub.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -85,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1A2BFD4C2048151500B19177"
-            BuildableName = "GitHub test.app"
-            BlueprintName = "GitHub test"
-            ReferencedContainer = "container:GitHub test.xcodeproj">
+            BuildableName = "GitHub.app"
+            BlueprintName = "GitHub"
+            ReferencedContainer = "container:GitHub.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
