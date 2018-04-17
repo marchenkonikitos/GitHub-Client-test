@@ -15,15 +15,28 @@ import Moya
 
 class GitHubTests: XCTestCase {
     
-    let userService = DIContainer.containerMock.resolve(UserServicesRealisation.self)
-    let userStorage = DIContainer.containerMock.resolve(UserStorageMock.self)
+    let userStorage = ContainerMock.containerMock.resolve(UserStorageMock.self)!
+    let userService = ContainerMock.containerMock.resolve(UserServices.self)!
+    
+    override func setUp() {
+        super.setUp()
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+//        userStorage?.saveUser(hash: "")
+        
+    }
+    
+    override func tearDown() {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
+    }
     
     func testAuth() {
-        userService?.login(username: "1", password: "1").done {
-            
-            }.catch{ error in
-                XCTFail(error.localizedDescription)
-            }
+        XCTAssertTrue(self.userService.isAuth == false, "Precondition fail")
+        userService.login(username: "1", password: "1").done {_ in
+            XCTAssertTrue(self.userService.isAuth == true, "NOT LOGGED IN")
+        }.catch{ error in
+            XCTFail(error.localizedDescription)
+        }
     }
     
 }

@@ -66,6 +66,14 @@
 		1AEC5B732085F0F3008DD852 /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAE51A2073946C00A68407 /* Moya.framework */; };
 		1AEC5B742085F0F3008DD852 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAE5172073946C00A68407 /* Result.framework */; };
 		1AEC5B752085F0F3008DD852 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE85DF4207648A900854DAB /* Swinject.framework */; };
+		1AEC5B7720861976008DD852 /* DIContainerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEC5B7620861976008DD852 /* DIContainerMock.swift */; };
+		1AEC5B79208619FD008DD852 /* UserStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEC5B78208619FD008DD852 /* UserStorageMock.swift */; };
+		1AEC5B7E20861F74008DD852 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AA2D08220625F7800C5A05C /* Assets.xcassets */; };
+		1AEC5B7F20861F9F008DD852 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A370D882068E05A00A13348 /* UserAPI.swift */; };
+		1AEC5B8020861FDD008DD852 /* MoyaProvider+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A23FC56206E7CBB002B7380 /* MoyaProvider+PromiseKit.swift */; };
+		1AEC5B8120862368008DD852 /* UserServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A370D942068ED6400A13348 /* UserServices.swift */; };
+		1AEC5B82208623A5008DD852 /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD261BA2068F9B8006C4F57 /* UserStorage.swift */; };
+		1AEC5B83208623BA008DD852 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2BFD662048812D00B19177 /* UserData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +156,8 @@
 		1AEC5B652085EC68008DD852 /* GitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AEC5B672085EC68008DD852 /* GitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitTests.swift; sourceTree = "<group>"; };
 		1AEC5B692085EC68008DD852 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1AEC5B7620861976008DD852 /* DIContainerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainerMock.swift; sourceTree = "<group>"; };
+		1AEC5B78208619FD008DD852 /* UserStorageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorageMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,6 +327,8 @@
 			children = (
 				1AEC5B672085EC68008DD852 /* GitTests.swift */,
 				1AEC5B692085EC68008DD852 /* Info.plist */,
+				1AEC5B7620861976008DD852 /* DIContainerMock.swift */,
+				1AEC5B78208619FD008DD852 /* UserStorageMock.swift */,
 			);
 			path = GitTests;
 			sourceTree = "<group>";
@@ -441,6 +453,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AEC5B7E20861F74008DD852 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,7 +527,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AEC5B7720861976008DD852 /* DIContainerMock.swift in Sources */,
+				1AEC5B8020861FDD008DD852 /* MoyaProvider+PromiseKit.swift in Sources */,
+				1AEC5B83208623BA008DD852 /* UserData.swift in Sources */,
+				1AEC5B7F20861F9F008DD852 /* UserAPI.swift in Sources */,
 				1AEC5B682085EC68008DD852 /* GitTests.swift in Sources */,
+				1AEC5B82208623A5008DD852 /* UserStorage.swift in Sources */,
+				1AEC5B8120862368008DD852 /* UserServices.swift in Sources */,
+				1AEC5B79208619FD008DD852 /* UserStorageMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

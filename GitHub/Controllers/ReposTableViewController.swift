@@ -59,7 +59,10 @@ class ReposTableViewController: UITableViewController {
         self.userImage.layer.cornerRadius = self.userImage.frame.height / 2
         
         let imageData = userServices.getAvatar()
-        self.userImage.image = UIImage(data: imageData! as Data)
+        
+        if imageData != nil {
+            self.userImage.image = UIImage(data: imageData! as Data)
+        }
     }
     
     func changeNumberOfRepos() {
