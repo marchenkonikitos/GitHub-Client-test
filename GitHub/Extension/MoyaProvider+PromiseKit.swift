@@ -31,7 +31,8 @@ extension MoyaProvider {
 
 extension TargetType {
     var baseURL: URL {
-        return URL(string: "https://api.github.com")!
+        let url = (Bundle.main.object(forInfoDictionaryKey: "APP_URL") as! String).replacingOccurrences(of: "\\", with: "")
+        return URL(string: url)!
     }
 }
 

@@ -21,10 +21,9 @@ class GitHubTests: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-//        userStorage?.saveUser(hash: "")
+        userStorage.saveUser(hash: "")
         
     }
-    
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
@@ -38,5 +37,4 @@ class GitHubTests: XCTestCase {
             XCTFail(error.localizedDescription)
         }
     }
-    
 }
